@@ -32,8 +32,9 @@ const NewsModel = connection_db.define('News', {
   image: {
     type: DataTypes.STRING(300),
     allowNull: true,
-  }
-});
+  }},{
+    timestamps: false
+  });
 
 // Establece la relación entre News y User
 NewsModel.belongsTo(UserModel, { foreignKey: 'user_id' });
