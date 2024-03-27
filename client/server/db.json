@@ -14,6 +14,14 @@
         "date": "27/03/2024",
         "user_id": "12134541",
         "id": "1"
+      },
+      {
+        "title": "Se suponía que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
+        "body": "texto largo de la noticia",
+        "image": "src/assets/img/prueba.jpg",
+        "date": "27/03/2024",
+        "user_id": "12134541",
+        "id": "2"
       }
     ]
   }
