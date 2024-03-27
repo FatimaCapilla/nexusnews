@@ -1,23 +1,19 @@
 import express from 'express';
-import {
-  getAllNews,
-  addNews,
-  editNews,
-  deleteNews,
-} from '../Controllers/NewsController'; // Corregir la extensión del archivo de controlador
-import {
-  loginUser,
-} from '../Controllers/UserController'; // Corregir la importación del controlador de usuario
+import {getAllNews, addNews, editNews, deleteNews} from '../Controllers/NewsController';
+import {loginUser} from '../Controllers/UserController';
+import { validateCreateNews,validateUpdateNews, validateDeleteNews} from '../validators/newsValidator';
 
 const router = express.Router();
 
-// Rutas para el CRUD de noticias
-router.get('/news', getAllNews);
-router.post('/news', addNews);
-router.put('/news/:id', editNews);
-router.delete('/news/:id', deleteNews);
 
-// Rutas existentes para la autenticación de usuarios
+router.get('/news', getAllNews);
+
+router.post('/news', validateCreateNews, addNews);
+
+router.put('/news/:id', validateUpdateNews, editNews);
+
+router.delete('/news/:id', validateDeleteNews, deleteNews);
+
 router.post('/users/login', loginUser);
 
 export default router;

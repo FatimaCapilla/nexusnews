@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'; // Import Request and Response types from Express
-import UserModel from '../Models/UserModel';
+import { Request, Response } from 'express'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import UserModel from '../Models/UserModel';
 
 // Función para manejar el inicio de sesión
 export const loginUser = async (req: Request, res: Response) => {
