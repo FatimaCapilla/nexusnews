@@ -1,0 +1,19 @@
+{
+    "users": [
+      {
+        "email": "mail@correo.com",
+        "password": "password",
+        "id": "1"
+      }
+    ],
+    "news": [
+        {
+          "title": "Se suponía que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
+          "subtitle": "Dave Plummer creó la interfaz de usuario del cuadro de diálogo para formatear unidades en 1994",
+          "text": "texto largo de la noticia",
+          "image": "https://i.blogs.es/310b46/fusion-solido-liquido/500_333.jpeg",
+          "id": "1"
+        }
+      ]
+  }
+ 
