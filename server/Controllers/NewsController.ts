@@ -4,7 +4,7 @@ import NewsModel from "../Models/NewsModel";
 export const getAllNews = async (req: Request, res: Response) => {
   try {
     const news = await NewsModel.findAll();
-    res.status(201).json({ success: true, data: news });
+    res.status(200).json({ success: true, data: news });
   } catch (error) {
     console.error('Error al obtener todos las noticias:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
@@ -35,7 +35,7 @@ export const editNews = async (req: Request, res: Response) => {
 
     await news.update({ title, body, user_id, date, image });
 
-    res.status(201).json({ success: true, data: news });
+    res.status(200).json({ success: true, data: news });
   } catch (error) {
     console.error('Error al editar noticia:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
