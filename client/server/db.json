@@ -22,6 +22,14 @@
         "date": "27/03/2024",
         "user_id": "12134541",
         "id": "2"
+      },
+      {
+        "title": "Probando una imagen alargada a ver que tal que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
+        "body": "texto largo de la noticia",
+        "image": "https://c8.alamy.com/compes/d49eb6/alargadas-nubes-iluminadas-por-el-sol-d49eb6.jpg",
+        "date": "27/03/2024",
+        "user_id": "12134541",
+        "id": "7"
       }
     ]
   }
