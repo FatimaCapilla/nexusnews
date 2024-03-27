@@ -1,4 +1,18 @@
 body {
     background-color: #1F1E1E;
-    color: #EEF0E5
+    color: #EEF0E5;
 }
+
+.header {
+    display: flex;
+    margin: 5%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header button {
+    padding: 10px 20px; /* Agrega más relleno para hacer el botón más grande */
+    font-size: 15px; /* Ajusta el tamaño del texto */
+    width: 200px; /* Ajusta el ancho del botón */
+    color: #1F1E1E;
+  }
