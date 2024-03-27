@@ -1,4 +1,4 @@
-const News = () => {
+const UpdateNews = () => {
     return (
       <>
         <div>HOLA</div>
@@ -6,4 +6,4 @@ const News = () => {
     )
   }
   
-  export default News
+  export default UpdateNews
