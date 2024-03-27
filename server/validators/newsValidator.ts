@@ -24,7 +24,8 @@ export const validateCreateNews = [
 
     check('image')
         .exists().withMessage("You gotta add an image")
-        .notEmpty().withMessage("The image can't be empty"),
+        .notEmpty().withMessage("The image can't be empty")
+        .isURL().withMessage("This gotta be url format"),
 
     (req: Request, res: Response, next: NextFunction) => {
         validateResult(req, res, next);
