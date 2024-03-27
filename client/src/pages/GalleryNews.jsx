@@ -1,7 +1,9 @@
+import "../pages/GalleryNews.css";
+
 const GalleryNews = () => {
     return (
       <>
-        <div>HOLA</div>
+        <h3>Tecnología - Últimas noticias</h3>
       </>
     )
   }
