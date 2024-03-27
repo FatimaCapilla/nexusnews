@@ -47,3 +47,16 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
+
+
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    console.log('Obteniendo lista de usuarios.');
+
+    const users = await UserModel.findAll();
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
