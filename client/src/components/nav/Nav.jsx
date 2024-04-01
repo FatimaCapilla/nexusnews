@@ -1,4 +1,4 @@
-import '../nav/Nav.css'
+import './Nav.css'
 import logo from '../../assets/logo-nexus-news.png';
 
 
