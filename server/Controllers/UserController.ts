@@ -11,12 +11,7 @@ export const loginUser = async (req: Request, res: Response) => {
     console.log('Intentando iniciar sesión:', email);
 
     // Buscar al usuario en la base de datos por su correo electrónico
-    interface User {
-      id: number;
-      email: string;
-      password: string;
-      admin: boolean;
-    }
+  
     const user: any | null = await UserModel.findOne({ where: { email } });
 
     // Si el usuario no se encuentra en la base de datos, devolver un mensaje de error
