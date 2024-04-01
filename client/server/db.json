@@ -3,6 +3,7 @@
       {
         "email": "mail@correo.com",
         "password": "password",
+        "confirmPassword": "password",
         "id": "1"
       }
     ],
