@@ -1,20 +1,32 @@
 {
-    "users": [
-      {
-        "email": "mail@correo.com",
-        "password": "password",
-        "confirmPassword": "password",
-        "id": "1"
-      }
-    ],
-    "news": [
-      {
-        "title": "Se suponía que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
-        "body": "texto largo de la noticia",
-        "image": "https://i.blogs.es/310b46/fusion-solido-liquido/500_333.jpeg",
-        "date": "27/03/2024",
-        "user_id": "12134541",
-        "id": "1"
-      }
-    ]
-  }
+  "users": [
+    {
+      "email": "mail@correo.com",
+      "password": "password",
+      "confirmPassword": "password",
+      "id": "1"
+    },
+    {
+      "id": "bbdc",
+      "email": "",
+      "password": "123456",
+      "confirmPassword": "123456"
+    },
+    {
+      "id": "8700",
+      "email": "bea@gmail.com",
+      "password": "123456",
+      "confirmPassword": "123456"
+    }
+  ],
+  "news": [
+    {
+      "title": "Se suponía que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
+      "body": "texto largo de la noticia",
+      "image": "https://i.blogs.es/310b46/fusion-solido-liquido/500_333.jpeg",
+      "date": "27/03/2024",
+      "user_id": "12134541",
+      "id": "1"
+    }
+  ]
+}
