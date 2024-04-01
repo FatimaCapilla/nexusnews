@@ -1,7 +1,16 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import connection_db from '../database/connection_db';
 
-const UserModel = connection_db.define('User', {
+// Definimos una interfaz que describe la estructura del modelo de usuario
+interface UserInstance extends Model {
+  id: number;
+  email: string;
+  password: string;
+  role: string;
+}
+
+// Definimos el modelo de usuario
+const UserModel = connection_db.define<UserInstance>('User', {
   id: {
     type: DataTypes.INTEGER, 
     autoIncrement: true,
@@ -17,15 +26,13 @@ const UserModel = connection_db.define('User', {
     allowNull: false,
   },
   role: {
-    type: DataTypes.STRING, // Corregido el tipo de dato para representar un valor booleano
+    type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: false, // Valor predeterminado en false, ya que es poco común que todos los usuarios sean administradores
-  }},{
-    timestamps: false
-  });
+    defaultValue: 'user', // Supongo que el valor predeterminado debería ser 'user' en lugar de false
+  }
+},{
+  timestamps: false
+});
 
-      
-
-
-
+// Exportamos el modelo de usuario
 export default UserModel;

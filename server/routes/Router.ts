@@ -3,6 +3,7 @@ import {getAllNews, addNews, editNews, deleteNews} from '../Controllers/NewsCont
 import {loginUser} from '../Controllers/UserController';
 import { validateCreateNews,validateUpdateNews, validateDeleteNews} from '../validators/newsValidator';
 import { getUsers } from '../Controllers/UserController';
+import { registerUser } from '../Controllers/RegisterController';
 const router = express.Router();
 
 
@@ -15,6 +16,8 @@ router.put('/news/:id', validateUpdateNews, editNews);
 router.delete('/news/:id', validateDeleteNews, deleteNews);
 
 router.post('/users/login', loginUser);
+
+router.post('/users/register', registerUser);
 
 router.get('/users', getUsers)
 
