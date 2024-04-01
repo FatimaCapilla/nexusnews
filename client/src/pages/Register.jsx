@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-//import {createUser} from '../services/usersServices';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const Register = () => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [showPassword, setShowPassword] = useState();
+    const [showPassword, setShowPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     const togglePasswordVisibility = () => {
@@ -27,69 +27,59 @@ const Register = () => {
         }
     };
 
-
     const handleRegister = async () => {
-      try {
-        // Validations
-        if (password.length < 6) {
-          Swal.fire({
-            title: 'Error',
-            text: 'La contraseña debe tener al menos 6 caracteres.',
-            icon: 'error',
-          });
-          return; // Exit early if password is too short
-        }
-  
-        setIsLoading(true);
-  
-        const response = await axios.post('http://localhost:3000/users', {
-          email,
-          password,
-          confirmPassword,
-        });
-  
-        if (response.data.success) {
-          setIsLoading(false);
-          Swal.fire({
-            title: 'Registro exitoso',
-            text: '¡Tu cuenta ha sido creada!',
-            icon: 'success',
-          }).then(() => {
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-          });
-        } else {
-          setIsLoading(false);
-          if (response.data.error === 'Email already registered') {
-            Swal.fire({
-              title: 'Error',
-              text: 'El usuario ya está registrado.',
-              icon: 'error',
+        try {
+            // Verificar si las contraseñas coinciden
+            if (password !== confirmPassword) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Las contraseñas no coinciden',
+                    icon: 'error',
+                });
+                return;
+            }
+
+            // Realizar la solicitud POST con Axios
+            const response = await axios.post('http://localhost:3000/users', {
+                email,
+                password,
+                confirmPassword,
             });
-          } else {
+
+            // Verificar si la solicitud fue exitosa
+            if (response.status === 201) {
+                Swal.fire({
+                    title: 'Registro exitoso',
+                    text: '¡Tu cuenta ha sido creada!',
+                    icon: 'success',
+                });
+                // Limpiar los campos del formulario
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+            } else {
+                // Manejar errores si la solicitud no fue exitosa
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+                    icon: 'error',
+                });
+            }
+        } catch (error) {
+            console.error('Error al intentar registrar:', error);
             Swal.fire({
-              title: 'Error',
-              text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
-              icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+                icon: 'error',
             });
-          }
         }
-      } catch (error) {
-        setIsLoading(false);
-        console.error('Error al intentar registrar:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
-          icon: 'error',
-        });
-      }
-    };    
+    };
+  
     return (
-        <div className="font-sans text-gray-900 ">
-            <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
-                <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">
-                    <form onSubmit={handleSubmit}>
+      <div className="font-sans text-gray-900">
+      <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
+          <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">
+              <form onSubmit={handleSubmit}>
                         <div className="py-8">
                             <center>
                                 <span className="text-2xl text-[#EEF0E5] font-semibold">Registro de usuarios</span>
@@ -98,9 +88,13 @@ const Register = () => {
                         <div>
                             <label className="block font-medium text-[#EEF0E5] text-sm" htmlFor="email">Email</label>
                             <input
+                                id="email"
                                 type='email'
                                 name='email'
                                 placeholder='Email'
+                                value={email}
+                                required
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
