@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const UpdateNews = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
