@@ -50,13 +50,6 @@
       "body": "Un texto de prueba a ver si esto funciona, ojalá que si funcione",
       "image": "https://img.freepik.com/foto-gratis/esfera-azul-brillante-sostenida-mano-humana-generada-ia_188544-41033.jpg",
       "date": "2024-04-01"
-    },
-    {
-      "id": "1556",
-      "title": "Vengo a hacer otra prueba",
-      "body": "INICIAMOS EL PROYECTO EN VISUAL En nuestra terminal escribimos npm init -y (El flag -y (o --yes) se utiliza para responder automáticamente a las preguntas del comando npm init con los valores predeterminados, lo que permite generar el archivo package.json rápidamente sin tener que interactuar con el terminal para cada pregunta. ) Creamos la carpeta database y dentro el archivo connection_db.js Creamos la carpeta models y dentro el archivo SculptureModel.js Creamos carpeta controllers y dentro el archivo SculptureControllers.js Creamos carpeta routes y dentro el archivo SculptureRouter.js Creamos carpeta tests Creamos el archivo app.js Creamos archivo .gitignore y escribiremos dentro ",
-      "image": "https://www.ikusi.com/mx/wp-content/uploads/sites/2/2022/06/post_thumbnail-4efabca9bd56b38edc0058c4ba006481.jpeg",
-      "date": "2024-04-01"
     }
   ]
 }
