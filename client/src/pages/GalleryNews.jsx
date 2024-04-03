@@ -28,6 +28,7 @@ const GalleryNews = () => {
             <div className="news-details">
             <h4>{item.title}</h4>
             <p>{item.date}</p>
+            <button className="details-button" onClick={() => navigate(`/news/${animal.id}`)}>+ Detalles</button>
           </div>
           </div>
         ))}
