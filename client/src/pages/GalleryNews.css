@@ -35,7 +35,7 @@ body {
     font-size: 25px;
   }
 
-  .gallery-news-item img {
+  .url-img {
     width: 25%; /* Ocupa el 65% del ancho de la noticia */
     height: 30%; /* Ocupa toda la altura de la noticia */
     object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
@@ -47,4 +47,18 @@ body {
     padding: 10px; /* Espaciado interior para el contenido */
     box-sizing: border-box; /* Incluye el padding en el ancho total */
     margin-left: 5%;
+  }
+
+  .arrow { 
+    width: 40px;
+    height: 15px;
+    margin-left: 15px;
+  }
+
+  .title-arrow {
+    display: flex;
+  }
+
+  .date {
+    margin-top: 10%;
   }
