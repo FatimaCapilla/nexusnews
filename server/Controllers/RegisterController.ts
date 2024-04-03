@@ -4,7 +4,7 @@ import UserModel from '../Models/UserModel';
 import { Request, Response } from 'express';
 
 export const registerUser = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password, confirmPassword } = req.body;
 
   try {
     console.log('Registrando nuevo usuario:', email);
@@ -21,7 +21,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const newUser = await UserModel.create({
       email,
       password: hashedPassword,
-      role: 'user', // Asignamos un valor predeterminado para el rol
+      role: 'user' // Asignamos un valor predeterminado para el rol
     });
     
 
