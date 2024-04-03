@@ -1,0 +1,26 @@
+.news-model {
+  margin: 20px auto; /* Margen alrededor del contenedor */
+  max-width: 800px; /* Ancho máximo del contenedor */
+  padding: 20px; /* Espaciado interno del contenedor */
+}
+
+.title-news {
+  font-size: 24px; /* Tamaño de fuente más grande para el título */
+  margin-bottom: 10px; /* Espacio inferior entre el título y la imagen */
+}
+
+.image-news {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Espacio inferior entre la imagen y el cuerpo */
+}
+
+.image-news img {
+  max-width: 100%; /* Imagen ajustada al ancho del contenedor */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+
+.body-news {
+  font-size: 18px; /* Tamaño de fuente más grande para el cuerpo */
+  line-height: 1.5; /* Espaciado entre líneas */
+}
