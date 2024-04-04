@@ -17,6 +17,26 @@
       "email": "bea@gmail.com",
       "password": "123456",
       "confirmPassword": "123456"
+    },
+    {
+      "id": "4",
+      "email": "mail@correo.com",
+      "password": "password"
+    },
+    {
+      "id": "4",
+      "email": "mail@correo.com",
+      "password": "password"
+    },
+    {
+      "id": "5",
+      "email": "nuriavilla199@gmail.com",
+      "password": "12345"
+    },
+    {
+      "id": "6",
+      "email": "nuriavilla199@gmail.com",
+      "password": "12345"
     }
   ],
   "news": [
