@@ -1,6 +1,7 @@
 import "../pages/GalleryNews.css";
 import React, { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
+import { useNavigate } from "react-router-dom";
 
 const GalleryNews = () => {
     const [news, setNews] = useState([]);
@@ -13,12 +14,13 @@ const GalleryNews = () => {
       fetchData();
     }, []);
 
+    const navigate = useNavigate();
 
     return (
       <>
       <div className="gallery-header">
         <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
-        <button className="gallery-button">Añadir noticia</button>
+        <button onClick={() => navigate("/add")} className="gallery-button">Añadir noticia</button>
       </div>
 
       <div className="gallery">
