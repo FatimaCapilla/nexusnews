@@ -1,5 +1,5 @@
 import "../pages/GalleryNews.css";
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
 
 const GalleryNews = () => {

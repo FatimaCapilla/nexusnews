@@ -1,5 +1,5 @@
 import { useState  } from 'react';
-import { useAuth } from '../context/AuthContext';
+ import { useAuth } from '../context/AuthContext';
 // Creamos un contexto para el estado de inicio de sesión
 
 
@@ -26,11 +26,11 @@ const Home = () => {
         }
     };
 
-    if (loggedIn) {
-        // Redirigir al usuario si ya está autenticado
-        window.location.href = '/client/src/pages/GalleryNews.jsx';
-        return null;
-    }
+    // if (loggedIn) {
+    //     // Redirigir al usuario si ya está autenticado
+    //     window.location.href = '/client/src/pages/GalleryNews.jsx';
+    //     return null;
+    // }
 
     return (
         <div className="font-sans text-gray-900">
