@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-
 export const AuthContext = React.createContext();
 
 // Proveedor del contexto para gestionar el estado de inicio de sesión
@@ -48,6 +47,7 @@ export const AuthProvider = ({ children }) => {
 };
 
 // Hook personalizado para acceder al contexto de autenticación
-const useAuth = () => {
+export const useAuth = () => {
     return useContext(AuthContext);
 };
+

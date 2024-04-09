@@ -1,8 +1,5 @@
-
-
-import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-
+import { useState  } from 'react';
+import { useAuth } from '../context/AuthContext';
 // Creamos un contexto para el estado de inicio de sesión
 
 
@@ -24,7 +21,7 @@ const Home = () => {
         try {
             await login(email, password);
         } catch (error) {
-            console.error('Error al procesar el formulario:', error);
+            // console.error('Error al procesar el formulario:', error);
             setError('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
         }
     };
