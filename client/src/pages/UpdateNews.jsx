@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { updateNews } from '../services/newsServices';
+import { useParams } from 'react-router';
 
 const UpdateNews = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [image, setImage] = useState('');
-  const [date, setDate] = useState('');
+    const [ id ] = useParams('');
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const [image, setImage] = useState('');
+    const [date, setDate] = useState('');
+
+    const [loading, setLoading] = useState(false);
+    const [newsData, setNewsData] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
