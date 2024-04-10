@@ -61,3 +61,21 @@ export const deleteNews = async (req: Request, res: Response) => {
   }
 };
 
+
+
+export const getOne = (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const news = NewsModel.findByPk(id);
+
+    if (!news) {
+      return res.status(404).json({ success: false, message: 'La noticia no se encontró' });
+    }
+
+    res.status(200).json({ success: true, news });
+  } catch (error) {
+    console.error('Error al obtener la noticia:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+};
