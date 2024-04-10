@@ -8,12 +8,12 @@ const GalleryNews = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const data = await getNews();
-          console.log("Data from getNews():", data); // Verifica el valor de data
-          if (Array.isArray(data)) {
-            setNews(data);
+          const response = await getNews();
+          console.log("Response from getNews():", response);
+          if (response.success && Array.isArray(response.data)) {
+            setNews(response.data);
           } else {
-            console.error("Data from getNews() is not an array:", data);
+            console.error("Invalid data format received from getNews():", response);
           }
         } catch (error) {
           console.error('Error fetching news:', error);
@@ -39,7 +39,7 @@ const GalleryNews = () => {
               <img className="arrow" src="src\assets\Vector.png" />
             </div>
             <p className="date">{item.date}</p>
-          </div>
+.          </div>
           </div>
         ))}
       </div>

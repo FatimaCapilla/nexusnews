@@ -4,7 +4,7 @@ import {loginUser} from '../Controllers/UserController';
 import { validateCreateNews,validateUpdateNews, validateDeleteNews} from '../validators/newsValidator';
 import { getUsers } from '../Controllers/UserController';
 import { registerUser } from '../Controllers/RegisterController';
-import { verifyToken } from '../Middleware/verifyToken';
+// import { verifyToken } from '../Middleware/verifyToken';
 const router = express.Router();
 
 
