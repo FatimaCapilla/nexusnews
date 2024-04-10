@@ -12,7 +12,7 @@ app.use(cors())
 
 app.use('/api', router);
 
-
+export default app;
 
 const main = async () => {
   try {

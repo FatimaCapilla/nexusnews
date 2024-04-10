@@ -16,3 +16,4 @@ export const authRol = (reqRol: string[]) =>  (req: Request, res: Response, next
     }
     next();
 };
+

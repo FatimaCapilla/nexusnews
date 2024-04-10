@@ -23,6 +23,6 @@ router.post('/users/login', loginUser);
 
 router.post('/users/register', registerUser);
 
-router.get('/users', authRol(["admin"]), getUsers);
+router.get('/users', getUsers);
 
 export default router;
