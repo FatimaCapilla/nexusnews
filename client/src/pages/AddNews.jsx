@@ -13,7 +13,7 @@ const AddNews = () => {
     };
 
     const handleRegister = async () => {
-            const response = await axios.post('http://localhost:3000/news', {
+            const response = await axios.post('http://localhost:3000/api/news', {
                 title,
                 body,
                 image,

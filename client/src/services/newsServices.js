@@ -1,5 +1,5 @@
 // Método GET
-const url='http://localhost:3000/news'
+const url='http://localhost:3000/api/news'
 
 export const getNews = async () => {  
     try {  
@@ -10,26 +10,3 @@ export const getNews = async () => {
       console.error('Error fetching news:', error); 
     }
   };
-
-
-  // Método PUT
-export const updateNews = async (id, newData) => { 
-  try {
-    const response = await fetch(`url/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newData)
-    });
-
-    if (!response.ok) { 
-      throw new Error('Error updating new'); 
-    }
-
-    return response.json(); 
-  } catch (error) {
-    console.error('Error updating new:', error);
-    throw error;
-  }
-};

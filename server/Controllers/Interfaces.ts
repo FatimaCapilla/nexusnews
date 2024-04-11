@@ -1,0 +1,1 @@
+//Poner las interfaces aqui, los tipados de typescript.

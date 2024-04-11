@@ -3,7 +3,7 @@ body {
     color: #EEF0E5;
 }
 
-.header {
+.gallery-header {
     display: flex;
     margin: 5%;
     margin-bottom: 1%;
@@ -11,18 +11,21 @@ body {
     align-items: center;
 }
 
-.header h3 {
+.gallery-h3 {
     font-size: 30px;
 }
 
-.header button {
+.gallery-button {
     padding: 10px 20px; /* Agrega más relleno para hacer el botón más grande */
     font-size: 15px; /* Ajusta el tamaño del texto */
+    font-weight: bolder;
     width: 200px; /* Ajusta el ancho del botón */
+    background-color: #EEF0E5;
     color: #1F1E1E;
+    border-radius: 10px;
   }
 
-  .news-item {
+  .gallery-news-item {
     border-top: 2px solid #fff; /* Añade una línea horizontal delgada */
     padding-top: 10px; /* Ajusta el espaciado entre la línea y el contenido de la noticia */
     margin-top: 20px; /* Ajusta el espaciado entre las noticias */
@@ -32,16 +35,30 @@ body {
     font-size: 25px;
   }
 
-  .news-item img {
+  .url-img {
     width: 25%; /* Ocupa el 65% del ancho de la noticia */
     height: 30%; /* Ocupa toda la altura de la noticia */
     object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
     margin-left: 8%;
 }
   
-  .news-details {
+  .gallery-news-details {
     width: 50%; /* Ocupa el 35% restante del ancho de la noticia */
     padding: 10px; /* Espaciado interior para el contenido */
     box-sizing: border-box; /* Incluye el padding en el ancho total */
     margin-left: 5%;
+  }
+
+  .arrow { 
+    width: 40px;
+    height: 15px;
+    margin-left: 15px;
+  }
+
+  .title-arrow {
+    display: flex;
+  }
+
+  .date {
+    margin-top: 10%;
   }

@@ -31,7 +31,7 @@
     {
       "title": "Se suponía que esta interfaz de Windows sería temporal: fue desarrollada en una mañana y lleva 30 años sin cambios",
       "body": "texto largo de la noticia",
-      "image": "src/assets/img/prueba.jpg",
+      "image": "https://msmk.university/wp-content/uploads/2023/03/Que-es-la-programacion.jpg",
       "date": "27/03/2024",
       "user_id": "12134541",
       "id": "2"
@@ -46,10 +46,17 @@
     },
     {
       "id": "a457",
-      "title": "Probando titular",
+      "title": "OpenAI ahora permite utilizar ChatGPT sin cuenta: así puedes usar esta función para mejorar la privacidad de tus chats",
       "body": "Un texto de prueba a ver si esto funciona, ojalá que si funcione",
       "image": "https://img.freepik.com/foto-gratis/esfera-azul-brillante-sostenida-mano-humana-generada-ia_188544-41033.jpg",
       "date": "2024-04-01"
+    },
+    {
+      "id": "b019",
+      "title": "Se supone que la cuota de mercado de Windows 11 debe seguir creciendo. Acaba de suceder exactamente lo contrario",
+      "body": "En junio de 2021 nos enteramos de la existencia de Windows 11. Primero por rumores y después por el anuncio oficial. En cualquier caso, este producto fue una auténtica sorpresa porque que hasta ese entonces todo parecía indicar que Windows 10 sería la versión definitiva del sistema. Sin embargo, Microsoft decidió actualizar su estrategia después de que la pandemia cambiara la forma en la que trabajábamos.",
+      "image": "https://i.blogs.es/b73ed0/windows-11/1200_800.jpeg",
+      "date": "2024-04-02"
     }
   ]
 }

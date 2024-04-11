@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -40,7 +40,7 @@ const Register = () => {
             }
 
             // Realizar la solicitud POST con Axios
-            const response = await axios.post('http://localhost:3000/users', {
+            const response = await axios.post('http://localhost:3000/api/users/register', {
                 email,
                 password,
                 confirmPassword,
