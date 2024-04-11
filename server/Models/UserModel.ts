@@ -28,14 +28,10 @@ const UserModel = connection_db.define<UserInstance>('User', {
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-<<<<<<< HEAD
     defaultValue: 'user', 
     validate: {
       isIn: [['user', 'admin']] 
     }
-=======
-    defaultValue: 'user', // Supongo que el valor predeterminado debería ser 'user' en lugar de false
->>>>>>> feature-front-login
   }
 },{
   timestamps: false
