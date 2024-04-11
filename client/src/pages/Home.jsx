@@ -1,15 +1,12 @@
-
-
-import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-
-// Creamos un contexto para el estado de inicio de sesión
-
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const { loggedIn, login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -23,17 +20,12 @@ const Home = () => {
 
         try {
             await login(email, password);
+            // Redirige a la ruta '/gallery' después de iniciar sesión correctamente
+            navigate('/gallery');
         } catch (error) {
-            console.error('Error al procesar el formulario:', error);
             setError('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
         }
     };
-
-    if (loggedIn) {
-        // Redirigir al usuario si ya está autenticado
-        window.location.href = '/client/src/pages/GalleryNews.jsx';
-        return null;
-    }
 
     return (
         <div className="font-sans text-gray-900">
@@ -80,4 +72,5 @@ const Home = () => {
         </div>
     );
 };
+
 export default Home;

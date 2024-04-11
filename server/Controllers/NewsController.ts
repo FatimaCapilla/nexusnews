@@ -61,6 +61,7 @@ export const deleteNews = async (req: Request, res: Response) => {
   }
 };
 
+<<<<<<< HEAD
 
 
 export const getOne = (req: Request, res: Response) => {
@@ -79,3 +80,5 @@ export const getOne = (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
+=======
+>>>>>>> feature-front-login

@@ -1,5 +1,5 @@
 import "../pages/GalleryNews.css";
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
 
 const GalleryNews = () => {
@@ -7,12 +7,20 @@ const GalleryNews = () => {
   
     useEffect(() => {
       const fetchData = async () => {
-        const data = await getNews();
-        setNews(data);
+        try {
+          const data = await getNews();
+          console.log("Data from getNews():", data); // Verifica el valor de data
+          if (Array.isArray(data)) {
+            setNews(data);
+          } else {
+            console.error("Data from getNews() is not an array:", data);
+          }
+        } catch (error) {
+          console.error('Error fetching news:', error);
+        }
       };
       fetchData();
     }, []);
-
 
     return (
       <>
