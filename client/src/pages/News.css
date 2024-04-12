@@ -1,7 +1,7 @@
 .news-model {
-  margin: 20px auto; /* Margen alrededor del contenedor */
-  max-width: 800px; /* Ancho máximo del contenedor */
-  padding: 20px; /* Espaciado interno del contenedor */
+  margin:  auto; /* Margen alrededor del contenedor */
+  max-width: 90%; /* Ancho máximo del contenedor */
+  color: #1F1E1E;
 }
 
 .title-news {
@@ -23,4 +23,18 @@
 .body-news {
   font-size: 18px; /* Tamaño de fuente más grande para el cuerpo */
   line-height: 1.5; /* Espaciado entre líneas */
+}
+
+.delete-button, .edit-button, .details-button{
+  border-radius: 150px;
+  background-color: #EEF0E5;
+  padding: 6px;
+  color: #1F1E1E;
+  margin-right: 7%;
+  width: 100px;
+}
+
+.delete-button:hover {
+  background-color: #8E0000;
+  color: white;
 }
