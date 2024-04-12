@@ -13,29 +13,40 @@ const AddNews = () => {
     };
 
     const handleRegister = async () => {
+        try {
             const response = await axios.post('http://localhost:3000/api/news', {
                 title,
                 body,
                 image,
                 date,
             });
+    
             if (response.status === 201) {
-              Swal.fire({
-                  title: 'Registro exitoso',
-                  text: '¡Tu noticia ha sido creada!',
-                  icon: 'success',
-              });
-              setTitle('');
-              setBody('');
-              setImage('');
-              setDate('');
-          } else {
-              Swal.fire({
-                  title: 'Error',
-                  text: 'Hubo un problema al intentar añadir tu noticia. Por favor, inténtalo de nuevo más tarde.',
-                  icon: 'error',
-              });
-          }
+                Swal.fire({
+                    title: 'Registro exitoso',
+                    text: '¡Tu noticia ha sido creada!',
+                    icon: 'success',
+                });
+                setTitle('');
+                setBody('');
+                setImage('');
+                setDate('');
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al intentar añadir tu noticia. Por favor, inténtalo de nuevo más tarde.',
+                    icon: 'error',
+                });
+            }
+        } catch (error) {
+            // Manejar errores de Axios
+            console.error('Error al enviar la solicitud:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al intentar añadir tu noticia. Por favor, inténtalo de nuevo más tarde.',
+                icon: 'error',
+            });
+        }
     };
   
     return (
