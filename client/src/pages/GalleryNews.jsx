@@ -7,12 +7,20 @@ const GalleryNews = () => {
   
     useEffect(() => {
       const fetchData = async () => {
-        const data = await getNews();
-        setNews(data);
+        try {
+          const response = await getNews();
+          console.log("Response from getNews():", response);
+          if (response.success && Array.isArray(response.data)) {
+            setNews(response.data);
+          } else {
+            console.error("Invalid data format received from getNews():", response);
+          }
+        } catch (error) {
+          console.error('Error fetching news:', error);
+        }
       };
       fetchData();
     }, []);
-
 
     return (
       <>
@@ -24,11 +32,13 @@ const GalleryNews = () => {
       <div className="gallery">
         {news.map((item, index) => (
           <div key={index} className="gallery-news-item">
-            <img src={item.image} />
-            <div className="gallery-news-details">
-            <h4>{item.title}</h4>
-            {/* <img className="arrow" src={} /> */}
-            <p>{item.date}</p>
+              <img className="url-img" src={item.image} />
+              <div className="gallery-news-details">
+            <div className="title-arrow">
+              <h4>{item.title}</h4>
+              <img className="arrow" src="src\assets\Vector.png" />
+            </div>
+            <p className="date">{item.date}</p>
           </div>
           </div>
         ))}

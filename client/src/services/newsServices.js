@@ -1,5 +1,5 @@
 // Método GET
-const url='http://localhost:3000/news'
+const url='http://localhost:3000/api/news'
 
 export const getNews = async () => {  
     try {  

@@ -33,10 +33,6 @@ const router = createBrowserRouter([
             element: <Register />, 
         },
         {
-            path: "/register",
-            element: <Register />, 
-        },
-        {
             path: "/update",
             element: <UpdateNews />, 
         }
