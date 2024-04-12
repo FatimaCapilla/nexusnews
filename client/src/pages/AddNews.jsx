@@ -11,6 +11,12 @@ const AddNews = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+          const token = localStorage.getItem('token'); // Obtener el token del localStorage
+            
+          // Verificar si el token está presente
+          if (!token) {
+              throw new Error('No se encontró un token de autenticación');
+          }
             const response = await axios.post('http://localhost:3000/api/news', {
                 title,
                 body,
