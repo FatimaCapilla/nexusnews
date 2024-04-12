@@ -16,11 +16,16 @@ export const authRol = (roles: string[]) => (req: AuthRequest, res: Response, ne
     const userRole = req.user?.role;
 
     // Verificar si el rol del usuario tiene acceso a la ruta
-    if (userRole && roles.includes(userRole)) {
+    try {
         // Si el usuario tiene el rol adecuado, continuar con la solicitud
-        next();
-    } else {
-        // Si el usuario no tiene el rol adecuado, enviar una respuesta de error
-        return res.status(403).json({ message: 'Acceso no autorizado' });
+        if (!userRole || !roles.some((role) => userRole.includes(role))) {
+            return res.status(403).json({ message: 'Acceso no autorizado' });
+        }
+    } catch (error) {
+        // Si hay algún error en la verificación, devolver un error 500
+        console.error('Error en la verificación de roles:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
+    
+    next();
 };

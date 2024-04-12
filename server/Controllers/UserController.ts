@@ -21,7 +21,8 @@ export const loginUser = async (req: Request, res: Response) => {
     }
     console.log('Inicio de sesión exitoso.');
     const token: string = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-    res.status(200).json({ success: true, message: 'Inicio de sesión exitoso', token });
+    const role = user.role
+    res.status(200).json({ success: true, message: 'Inicio de sesión exitoso', token, role });
   } catch (error) {
     console.error('Error al manejar inicio de sesión:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });

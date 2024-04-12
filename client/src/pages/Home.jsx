@@ -1,11 +1,14 @@
+// Home.jsx
+
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const { loggedIn, login } = useAuth();
+    const { loggedIn, login, error } = useAuth(); // Obtener la función de inicio de sesión desde el contexto
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
@@ -14,16 +17,13 @@ const Home = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        const email = formData.get('email');
-        const password = formData.get('password');
 
         try {
-            await login(email, password);
+            await login(email, password); // Llamar a la función de inicio de sesión con el email y la contraseña
             // Redirige a la ruta '/gallery' después de iniciar sesión correctamente
             navigate('/gallery');
         } catch (error) {
-            setError('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
+            console.error('Error al iniciar sesión:', error);
         }
     };
 
@@ -45,12 +45,20 @@ const Home = () => {
                             <input type='email'
                                 name='email'
                                 placeholder='Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)} // Manejar el cambio en el input de email
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
                             <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
                             <div className="relative">
-                                <input id="password" type={showPassword ? 'text' : 'password'} name="password" placeholder="Contraseña" required autoComplete="current-password" className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                                <input id="password" type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)} // Manejar el cambio en el input de contraseña
+                                    placeholder="Contraseña"
+                                    required autoComplete="current-password"
+                                    className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
                                         Mostrar Contraseña

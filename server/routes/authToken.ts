@@ -4,10 +4,15 @@ import UserModel from '../Models/UserModel';
 import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../config';
 
-export const authToken= async (req: Request, res: Response) => {
+export const authToken = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
+        // Verificar si se proporcionaron tanto el correo electrónico como la contraseña
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Correo electrónico y contraseña requeridos' });
+        }
+
         // Buscar al usuario en la base de datos por su correo electrónico
         const user = await UserModel.findOne({ where: { email } });
 

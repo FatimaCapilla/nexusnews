@@ -1,23 +1,35 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "./verifyToken";
+import jwt from 'jsonwebtoken';
+import { SECRET_KEY } from "../config";
 
-export const authRol = (reqRol: string[]) =>  (req: Request, res: Response, next: NextFunction) => {
-    const authToken = req.headers.authorization?.split(' ')[1];
+interface AuthRequest extends Request {
+    userId?: string;
+    userRole?: string; // Agregar userRole para almacenar el rol del usuario
+}
+
+export const authRol = (roles: string[]) => (req: AuthRequest, res: Response, next: NextFunction) => {
+    // Obtener el token de autorización del encabezado
+    const token = req.headers.authorization?.split(' ')[1];
+    
     try {
-        if (!authToken) {
+        if (!token) {
             throw new Error('Authorization token not provided');
         }
         
-        const dataToken: any = verifyToken(req, res, next);
-        const rolUser = dataToken.rol;
-        const rolesByUser = rolUser;
-        const checkValueRol = reqRol.some((rolSingle) => rolesByUser.includes(rolSingle));
-        if (!checkValueRol) {
-            return res.status(401).send({ error: 'You do not have access' });
+        // Verificar el token y extraer los datos del usuario
+        const decoded: any = jwt.verify(token, SECRET_KEY);
+        const userRole = decoded.role; // Obtener el rol del usuario desde el token
+
+        // Verificar si el rol del usuario tiene acceso a la ruta
+        if (!userRole || !roles.some((role) => userRole.includes(role))) {
+            return res.status(403).json({ message: 'Access denied' });
         }
+        
+        // Almacenar el rol del usuario en la solicitud para su posterior uso
+        req.userRole = userRole;
+        next();
     } catch (error) {
         console.error('Authentication error:', error);
-        return res.status(401).send({ error: 'Failed to authenticate' });
+        return res.status(401).json({ error: 'Failed to authenticate' });
     }
-    next();
 };
