@@ -1,17 +1,13 @@
-// Home.jsx
-
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const { loggedIn, login, error } = useAuth(); // Obtener la función de inicio de sesión desde el contexto
-    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
     const navigate = useNavigate();
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
         setShowPassword(!showPassword);
     };
 
@@ -19,8 +15,23 @@ const Home = () => {
         event.preventDefault();
 
         try {
-            await login(email, password); // Llamar a la función de inicio de sesión con el email y la contraseña
-            // Redirige a la ruta '/gallery' después de iniciar sesión correctamente
+            const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al iniciar sesión');
+            }
+
+            const { token, role } = await response.json();
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
+
             navigate('/gallery');
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
@@ -37,17 +48,9 @@ const Home = () => {
                                 <span className="text-2xl text-[#EEF0E5] font-semibold">Iniciar Sesión</span>
                             </center>
                         </div>
-                        {error && (
-                            <div className="text-red-500">{error}</div>
-                        )}
                         <div>
                             <label className="block font-medium text-[#EEF0E5] text-sm" htmlFor="email">Email</label>
-                            <input type='email'
-                                name='email'
-                                placeholder='Email'
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)} // Manejar el cambio en el input de email
-                                className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
                             <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
@@ -55,13 +58,13 @@ const Home = () => {
                                 <input id="password" type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)} // Manejar el cambio en el input de contraseña
+                                    onChange={(e) => setPassword(e.target.value)}
                                     placeholder="Contraseña"
                                     required autoComplete="current-password"
                                     className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
-                                        Mostrar Contraseña
+                                        {showPassword ? 'Ocultar Contraseña' : 'Mostrar Contraseña'}
                                     </button>
                                 </div>
                             </div>

@@ -1,22 +1,17 @@
-import "../pages/GalleryNews.css";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
-
-const GalleryNews = ({ token }) => {
+import "./GalleryNews.css"
+const GalleryNews = () => {
     const [news, setNews] = useState([]);
-  
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if (!token) {
-                    console.error('Token de autenticación no proporcionado');
-                    return;
-                }
+    const [userRole, setUserRole] = useState('');
 
-                const response = await getNews(token);
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const response = await getNews();
                 console.log("Data from getNews():", response);
-                if (response && response.success && Array.isArray(response.data)) {
-                    setNews(response.data);
+                if (response && Array.isArray(response)) {
+                    setNews(response);
                 } else {
                     console.error("Data from getNews() is not in the expected format:", response);
                 }
@@ -25,15 +20,22 @@ const GalleryNews = ({ token }) => {
             }
         };
 
-        if (token) {
-            fetchData();
-        }
-    }, [token]);
+        const userRole = localStorage.getItem('role');
+        setUserRole(userRole);
+
+        fetchNews();
+    }, []);
 
     return (
         <>
             <div className="gallery-header">
                 <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
+                {userRole === 'admin' && (
+                    <div className="flex space-x-4">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 1</button>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 2</button>
+                    </div>
+                )} 
                 <button className="gallery-button">Añadir noticia</button>
             </div>
             
