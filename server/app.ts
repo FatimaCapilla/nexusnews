@@ -11,8 +11,8 @@ export const app = express();
 app.use(express.json());
 app.use(cors())
 
-app.use('/news', newsRouter);
-app.use('/users', authRouter);
+app.use('/api', newsRouter);
+app.use('/api', authRouter);
 
 
 export default app;

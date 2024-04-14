@@ -12,9 +12,9 @@ export const getAllNews = async(req: Request, res: Response) => {
 }
 
 export const addNews = async (req: Request, res: Response) => {
-    const { title, body, user_id } = req.body;
+    const { title, body, user_id, date, image } = req.body;
     try {
-        const news = await NewsModel.create({ title, body, user_id });
+        const news = await NewsModel.create({ title, body, user_id, date,image });
         res.status(201).json(news);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -23,7 +23,7 @@ export const addNews = async (req: Request, res: Response) => {
 
 export const editNews = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { title, body } = req.body;
+    const {title, body, date, image } = req.body;
     try {
         const news = await NewsModel.findByPk(id);
         if (news) {

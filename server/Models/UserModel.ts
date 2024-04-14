@@ -25,7 +25,7 @@ const UserModel = connection_db.define<UserInstance>('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rol: {
+  role: {
     type: DataTypes.STRING,
     defaultValue : 'user',
     allowNull: false
