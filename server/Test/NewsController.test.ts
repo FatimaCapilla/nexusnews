@@ -1,78 +1,57 @@
 import request from 'supertest';
-import app from '../app';
-import { expect } from 'chai';
+import express from 'express';
+import { app } from '../app';
+import UsersModel from '../Models/UserModel';
 import NewsModel from '../Models/NewsModel';
+import { tokenInit } from './Token';
+import { CreateUser } from './helpers';
 
 const api = request(app);
-let newsId;
 
+describe('CRUD de noticias', () => {
+    let newUser: any = {};
+    let userToken: string;
 
-
-afterAll(async () => {
-  if (newsId) {
-
-    await NewsModel.delete(newsId);
-  }
-});
-
-describe('Controladores de Noticias', () => {
-  describe('Debería obtener todas las noticias', async () => {
-    it('Debería obtener todas las noticias correctamente', async () => {
-      const response = await request(app).get('/news');
-      expect(response.status).to.equal(200);
-      expect(response.body.success).to.be.true;
-      expect(response.body.data).to.be.an('array');
+    beforeEach(async () => {
+        newUser = await UsersModel.create(CreateUser);
+        userToken = tokenInit(newUser);
     });
-  });
 
-  describe('Debería agregar una nueva noticia', async () => {
-    it('Debería agregar una nueva noticia correctamente', async () => {
-      const newsData = {
-        title: 'Nueva Noticia',
-        body: 'Contenido de la nueva noticia',
-        user_id: 1,
-        date: '2024-04-12',
-        image: 'imagen.jpg'
-      };
-      const response = await request(app).post('/news').send(newsData);
-      expect(response.status).to.equal(201);
-      expect(response.body.success).to.be.true;
-      expect(response.body.data).to.have.property('id');
-      newsId = response.body.data.id;
+    afterEach(async () => {
+        await UsersModel.destroy({ where: { id: newUser.id } });
     });
-  });
 
-  describe('Debería editar una noticia existente', async () => {
-    it('Debería editar una noticia existente correctamente', async () => {
-      const updatedNewsData = {
-        title: 'Noticia Editada',
-        body: 'Contenido de la noticia editada',
-        user_id: 1,
-        date: '2024-04-12',
-        image: 'imagen-editada.jpg'
-      };
-      const response = await request(app).put(`/news/${newsId}`).send(updatedNewsData);
-      expect(response.status).to.equal(200);
-      expect(response.body.success).to.be.true;
-      expect(response.body.data).to.have.property('title').that.equals(updatedNewsData.title);
+    it('GET debe devolver un array y un estado 200', async () => {
+        const response = await api.get('/api/news').set('Authorization', `Bearer ${userToken}`);
+        expect(response.status).toBe(200);
+        expect(Array.isArray(response.body)).toBe(true);
     });
-  });
 
-  describe('Debería eliminar una noticia existente', async () => {
-    it('Debería eliminar una noticia existente correctamente', async () => {
-      const response = await request(app).delete(`/news/${newsId}`);
-      expect(response.status).to.equal(200);
-      expect(response.body.success).to.be.true;
-      expect(response.body.message).to.equal('Noticia eliminada con éxito');
+    it('POST debe devolver un objeto y un estado 201', async () => {
+        const newNewsData = { title: 'Nueva Noticia', content: 'Contenido de la nueva noticia' };
+        const response = await api.post('/api/news').set('Authorization', `Bearer ${userToken}`).send(newNewsData);
+        expect(response.status).toBe(201);
+        expect(typeof response.body).toBe('object');
+        expect(response.body).toMatchObject(newNewsData);
     });
-  });
 
-  describe('Debería obtener una sola noticia', async () => {
-    it('Debería obtener una sola noticia correctamente', async () => {
-      const response = await request(app).get(`/news/${newsId}`);
-      expect(response.status).to.equal(200);
-      expect(response.body.success).to.be.true;
-      expect(response.body.news).to.exist;
+    it('DELETE debe devolver un estado 200', async () => {
+        const newNewsResponse = await api.post('api/news').set('Authorization', `Bearer ${userToken}`).send();
+        const response = await api.delete(`/news/${newNewsResponse.body.id}`).set('Authorization', `Bearer ${userToken}`).send();
+        expect(response.status).toBe(200);
     });
-  });
+
+    it('PUT debe devolver un objeto y un estado 200', async () => {
+        const newNewsResponse = await api.post('/api/news').set('Authorization', `Bearer ${userToken}`).send();
+        const updatedNewsData = { title: 'Noticia Actualizada', content: 'Contenido Actualizado' };
+        const response = await api.put(`/news/${newNewsResponse.body.id}`).set('Authorization', `Bearer ${userToken}`).send(updatedNewsData);
+        expect(response.status).toBe(200);
+        expect(typeof response.body).toBe('object');
+        expect(response.body).toMatchObject(updatedNewsData);
+    });
+
+    afterAll(async () => {
+        await NewsModel.destroy({ where: {} });
+        await UsersModel.destroy({ where: {} });
+    });
 });

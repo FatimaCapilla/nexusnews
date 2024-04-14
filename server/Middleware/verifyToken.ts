@@ -1,23 +1,22 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import {SECRET_KEY} from "../config"
+import { SECRET_KEY } from '../config';
 
-interface AuthRequest extends Request {
-    userId?: string; 
-}
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
-export const verifyToken = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const token = req.headers['authorization']; 
-    
     if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
+        return res.status(401).send({ error: 'No authentication token provided.' });
     }
 
-    try {
-        const decoded = jwt.verify(token, SECRET_KEY); 
-        req.userId = (decoded as any).userId; 
-        next(); 
-    } catch (error) {
-        return res.status(403).json({ message: 'Failed to authenticate token' });
-    }
+    jwt.verify(token, SECRET_KEY, (err) => {
+        if (err) {
+            return res.status(403).send({ error: 'Invalid Token.' });
+        }
+
+        next();
+    });
 };
+
+

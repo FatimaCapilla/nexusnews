@@ -25,15 +25,12 @@ const UserModel = connection_db.define<UserInstance>('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  role: {
+  rol: {
     type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: 'user', 
-    validate: {
-      isIn: [['user', 'admin']] 
-    }
-  }
-},{
+    defaultValue : 'user',
+    allowNull: false
+}},
+{
   timestamps: false
 });
 

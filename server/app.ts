@@ -1,16 +1,19 @@
 import express from 'express';
+import newsRouter from "./routes/newsRouter"
+import authRouter from "./routes/authRouter"
 import connection_db from './database/connection_db';
 import UserModel from './Models/UserModel';
-import { PORT } from './config';
 import NewsModel from './Models/NewsModel';
-import router from './routes/Router';
+import { PORT } from './config';
 import cors from 'cors'
 
 export const app = express();
 app.use(express.json());
 app.use(cors())
 
-app.use('/api', router);
+app.use('/news', newsRouter);
+app.use('/users', authRouter);
+
 
 export default app;
 
