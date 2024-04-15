@@ -218,6 +218,7 @@ export const AuthContext = React.createContext();
 // Proveedor del contexto para gestionar el estado de inicio de sesión
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [dataUser, setDataUser] = useState([]);
     const [dataUser, setDataUser] = useState(false);
 
     useEffect(() => {
@@ -237,6 +238,8 @@ const AuthProvider = ({ children }) => {
                 const token = response.data.token;
                 localStorage.setItem('token', token);
                 setLoggedIn(true);
+                setDataUser(response.data.role);
+               
                 setDataUser(response.data.role);
             } else {
                 throw new Error('Credenciales incorrectas');

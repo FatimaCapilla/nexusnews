@@ -1,29 +1,40 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const { login } = useAuth();
-    const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
     const navigate = useNavigate();
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
         setShowPassword(!showPassword);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        const email = formData.get('email');
-        const password = formData.get('password');
 
         try {
-            await login(email, password);
-            // Redirige a la ruta '/gallery' después de iniciar sesión correctamente
+            const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al iniciar sesión');
+            }
+
+            const { token, role } = await response.json();
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
+
             navigate('/gallery');
         } catch (error) {
-            setError('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
+            console.error('Error al iniciar sesión:', error);
         }
     };
 
@@ -37,23 +48,23 @@ const Home = () => {
                                 <span className="text-2xl text-[#EEF0E5] font-semibold">Iniciar Sesión</span>
                             </center>
                         </div>
-                        {error && (
-                            <div className="text-red-500">{error}</div>
-                        )}
                         <div>
                             <label className="block font-medium text-[#EEF0E5] text-sm" htmlFor="email">Email</label>
-                            <input type='email'
-                                name='email'
-                                placeholder='Email'
-                                className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
                             <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
                             <div className="relative">
-                                <input id="password" type={showPassword ? 'text' : 'password'} name="password" placeholder="Contraseña" required autoComplete="current-password" className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                                <input id="password" type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Contraseña"
+                                    required autoComplete="current-password"
+                                    className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
-                                        Mostrar Contraseña
+                                        {showPassword ? 'Ocultar Contraseña' : 'Mostrar Contraseña'}
                                     </button>
                                 </div>
                             </div>
@@ -65,7 +76,7 @@ const Home = () => {
                         </div>
                     </form>
                 </div>
-                <button className="ms-4 inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
+                <button onClick={() => navigate("/register")} className="ms-4 inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
                     Registro nuevos usuarios
                 </button>
             </div>
