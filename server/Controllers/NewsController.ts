@@ -26,15 +26,11 @@ export const editNews = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { title, body, user_id, date, image } = req.body;
-
     const news = await NewsModel.findByPk(id);
-
     if (!news) {
       return res.status(404).json({ success: false, error: 'Noticia no encontrado' });
     }
-
     await news.update({ title, body, user_id, date, image });
-
     res.status(200).json({ success: true, data: news });
   } catch (error) {
     console.error('Error al editar noticia:', error);
@@ -45,23 +41,17 @@ export const editNews = async (req: Request, res: Response) => {
 export const deleteNews = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-
     const news = await NewsModel.findByPk(id);
-
     if (!news) {
       return res.status(404).json({ success: false, error: 'Noticia no encontrada' });
     }
-
     await news.destroy();
-
     res.status(200).json({ success: true, message: 'Noticia eliminada con éxito' });
   } catch (error) {
     console.error('Error al eliminar el Libro:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 };
-
-
 
 export const getOne = (req: Request, res: Response) => {
   try {

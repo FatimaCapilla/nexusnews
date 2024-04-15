@@ -4,18 +4,18 @@ import { loginUser } from '../Controllers/UserController';
 import { validateCreateNews, validateUpdateNews, validateDeleteNews } from '../validators/newsValidator';
 import { getUsers } from '../Controllers/UserController';
 import { registerUser } from '../Controllers/RegisterController';
-import { authRol } from  "./authRol"
-import { authToken } from './authToken';
+//import { authRol } from  "./authRol"
+//import { authToken } from './authToken';
 
 const router = express.Router();
 
-router.get('/news', authToken , authRol(["user", "admin"]), getAllNews);
+router.get('/news', getAllNews);
 
-router.post('/news',authToken , authRol(["user", "admin"]), validateCreateNews, addNews);
+router.post('/news', addNews);
 
-router.put('/news/:id', authToken , authRol(["admin"]), validateUpdateNews, editNews);
+router.put('/news/:id', validateUpdateNews, editNews);
 
-router.delete('/news/:id',authToken , authRol(["admin"]), validateDeleteNews, deleteNews);
+router.delete('/news/:id', validateDeleteNews, deleteNews);
 
 router.get('/news/:id', getOne)
 

@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import UserModel from '../Models/UserModel';
+
 import { SECRET_KEY } from '../config';
 // Función para manejar el inicio de sesión
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
   try {
     console.log('Intentando iniciar sesión:', email);
     const user: any | null = await UserModel.findOne({ where: { email } });
@@ -31,7 +31,6 @@ export const loginUser = async (req: Request, res: Response) => {
 export const getUsers = async (req: Request, res: Response) => {
   try {
     console.log('Obteniendo lista de usuarios.');
-
     const users = await UserModel.findAll();
     res.status(200).json({ success: true, data: users });
   } catch (error) {
