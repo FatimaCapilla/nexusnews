@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
 import "./GalleryNews.css"
 import { useNavigate } from 'react-router-dom';
