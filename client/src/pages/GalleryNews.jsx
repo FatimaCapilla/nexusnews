@@ -28,7 +28,6 @@ const GalleryNews = () => {
         <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
         <button className="gallery-button">Añadir noticia</button>
       </div>
-
       <div className="gallery">
         {news.map((item, index) => (
           <div key={index} className="gallery-news-item">
