@@ -2,14 +2,18 @@ import axios from "axios";
 const URLAPI_NEWS = 'http://www.localhost:3000/api/news/';
 
 export const getOneNews = async (id) =>{
-  try{
+  const token = localStorage.getItem('token')
+  console.log(token)
+  const headers = {'Authorization': `Bearer ${token}`}
+  try {
     const response = await axios.get(`${URLAPI_NEWS+id}`);
-    
     return response.data
-  } catch(error){
-    console.error('Error');
+  } catch (error) {
+    console.error('Error fetching news:', error);
+    throw error;
   }
-}
+};
+
 
 export const deleteNews = async (id) => {
   try {
