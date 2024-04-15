@@ -2,20 +2,22 @@ import moment from 'moment';
 
 
 export const CreateUser = {
-    "name": "user",
-    "email": "user@gmail.com",
+    "email": "admin@gmail.com",
     "password": "123456"
 }
 export const deleteUser = {
-    "name": "user",
-    "email": "user@gmail.com",
-    "password": "123456"
+    "email": "admin@gmail.com",
+    "password": "123456",
+    "role": "admin"
 }
 
-export const UpUser = {
-    "name": "User",
-    "email": "user@gmail.com",
-    "password": "123456"
+
+export const testTry = {
+    "title": "title",
+    "body": "body",
+    "date": moment().toISOString(), // Formatear la fecha con todos los detalles de tiempo
+    "image": "http://www.google.com"
 }
+
 
 
