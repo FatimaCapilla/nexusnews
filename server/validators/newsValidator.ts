@@ -12,11 +12,11 @@ export const validateCreateNews = [
     check('body')
         .exists().withMessage("Debes agregar un cuerpo")
         .notEmpty().withMessage("El cuerpo no puede estar vacío")
-        .isLength({ min: 5, max: 1000 }).withMessage("El cuerpo debe tener entre 10 y 1000 caracteres"),
+        .isLength({ min: 1, max: 1000 }).withMessage("El cuerpo debe tener entre 10 y 1000 caracteres"),
 
-    check('user_id')
-        .exists().withMessage("Debes agregar un user_id")
-        .isInt().withMessage("El user_id debe ser un número entero"),
+    // check('user_id')
+    //     .exists().withMessage("Debes agregar un user_id")
+    //     .isInt().withMessage("El user_id debe ser un número entero"),
 
     check('date')
         .exists().withMessage("Debes agregar una fecha")

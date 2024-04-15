@@ -6,11 +6,10 @@ import { authToken } from '../Middleware/authToken';
 
 const router = express.Router();
 
-router.get('/news', getAllNews);
+router.get('/news', authToken, authRol(["user", "admin"]), getAllNews);
 router.post('/news', authToken, authRol(["user", "admin"]), validateCreateNews, addNews);
 router.put('/news/:id', authToken, authRol(["admin"]), validateUpdateNews, editNews);
 router.delete('/news/:id', authToken, authRol(["admin"]), validateDeleteNews, deleteNews);
 router.get('/news/:id', getOneNews);
 
 export default router;
-

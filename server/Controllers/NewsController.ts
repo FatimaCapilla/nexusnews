@@ -23,14 +23,12 @@ export const addNews = async (req: Request, res: Response) => {
 
 export const editNews = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const {title, body, date, image } = req.body;
+    const { title, body, date, image } = req.body;
     try {
         const news = await NewsModel.findByPk(id);
         if (news) {
-            news.title = title;
-            news.body = body;
-            await news.save();
-            res.status(200).json(news);
+            const updatedNews = await news.update({ title, body, date, image });
+            res.status(200).json(updatedNews);
         } else {
             res.status(404).json({ message: 'News not found' });
         }
@@ -38,6 +36,7 @@ export const editNews = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 export const deleteNews = async (req: Request, res: Response) => {
     const { id } = req.params;

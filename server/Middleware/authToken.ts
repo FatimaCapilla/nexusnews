@@ -1,14 +1,30 @@
+import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from "./Token";
+import { SECRET_KEY } from '../config';
 
-export const authToken = (req: Request, res: Response, next: NextFunction) =>{
-    try {
-        const authToken = req.headers.authorization?.split(' ')[1];
-        const dataToken: any = verifyToken(authToken);
-        const userId: number = dataToken.userId;
-        req.body.author_id = userId;
-    next();
-    } catch (error) {
-        return res.status(401).send({ error: 'invalid authentication' }); 
-    }
+interface RequestWithUserId extends Request {
+    userId?: number;
 }
+
+export const authToken = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).send({ error: 'No authentication token provided.' });
+        }
+
+        jwt.verify(token, SECRET_KEY, (err) => {
+            if (err) {
+                return res.status(403).send({ error: 'Invalid Token.' });
+            }
+
+            next();
+        });
+    } catch (error) {
+        console.error('Error en authToken:', error);
+        return res.status(500).send({ error: 'Error en el servidor' });
+    }
+};
+
