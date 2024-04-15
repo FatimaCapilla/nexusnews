@@ -14,11 +14,17 @@ const AddNews = () => {
     };
 
     const handleRegister = async () => {
+        const token = localStorage.getItem('token');
+        try {
             const response = await axios.post('http://localhost:3000/api/news', {
                 title,
                 body,
                 image,
                 date,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             if (response.status === 201) {
               Swal.fire({
@@ -37,6 +43,14 @@ const AddNews = () => {
                   icon: 'error',
               });
           }
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al intentar añadir tu noticia. Por favor, inténtalo de nuevo más tarde.',
+                icon: 'error',
+            });
+        }
     };
   
     return (
