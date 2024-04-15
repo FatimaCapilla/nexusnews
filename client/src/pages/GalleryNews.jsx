@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
 import "./GalleryNews.css"
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const GalleryNews = () => {
   const [news, setNews] = useState([]);
@@ -49,7 +49,9 @@ const GalleryNews = () => {
             <div className="gallery-news-details">
               <div className="title-arrow">
                 <h4>{item.title}</h4>
-                <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
+                <Link to={`/news/${item.id}`}>
+                  <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
+                </Link>
               </div>
               <p className="date">{item.date}</p>
             </div>
