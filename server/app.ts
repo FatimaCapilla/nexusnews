@@ -1,18 +1,21 @@
 import express from 'express';
+import newsRouter from "./routes/newsRouter"
+import authRouter from "./routes/authRouter"
 import connection_db from './database/connection_db';
 import UserModel from './Models/UserModel';
-import { PORT } from './config';
 import NewsModel from './Models/NewsModel';
-import router from './routes/Router';
-import cors from "cors";
+import { PORT } from './config';
+import cors from 'cors'
 
-const app = express();
+export const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors())
 
-app.use('/api', router);
+app.use('/api', newsRouter);
+app.use('/api', authRouter);
 
 
+export default app;
 
 const main = async () => {
   try {
@@ -30,7 +33,7 @@ const main = async () => {
 };
 
 // Iniciar el servidor
-const server = app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   console.log(`💚 Server is running on port ${PORT}`);
 }).on('error', (error) => {
   console.log('❌❌ Server error ❌❌:', error.message);

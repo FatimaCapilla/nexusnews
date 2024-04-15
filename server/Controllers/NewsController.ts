@@ -1,63 +1,68 @@
+import UserModel from '../Models/UserModel';
+import NewsModel from '../Models/NewsModel';
 import { Request, Response } from 'express';
-import NewsModel from "../Models/NewsModel";
 
-export const getAllNews = async (req: Request, res: Response) => {
-  try {
-    const news = await NewsModel.findAll();
-    res.status(200).json({ success: true, data: news });
-  } catch (error) {
-    console.error('Error al obtener todos las noticias:', error);
-    res.status(500).json({ success: false, error: 'Error interno del servidor' });
-  }
-};
+export const getAllNews = async(req: Request, res: Response) => {
+    try {
+        const news = await NewsModel.findAll();
+        res.status(200).json(news);
+    } catch (error) {
+        res.status(500).json({ err: 'Server Error' });
+    }
+}
 
 export const addNews = async (req: Request, res: Response) => {
-  try {
     const { title, body, user_id, date, image } = req.body;
-    const newNews = await NewsModel.create({ title, body, user_id, date, image });
-    res.status(201).json({ success: true, data: newNews });
-  } catch (error) {
-    console.error('Error al agregar la noticia:', error);
-    res.status(500).json({ success: false, error: 'Error interno del servidor' });
-  }
+    try {
+        const news = await NewsModel.create({ title, body, user_id, date,image });
+        res.status(201).json(news);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 export const editNews = async (req: Request, res: Response) => {
-  try {
     const { id } = req.params;
-    const { title, body, user_id, date, image } = req.body;
-
-    const news = await NewsModel.findByPk(id);
-
-    if (!news) {
-      return res.status(404).json({ success: false, error: 'Noticia no encontrado' });
+    const { title, body, date, image } = req.body;
+    try {
+        const news = await NewsModel.findByPk(id);
+        if (news) {
+            const updatedNews = await news.update({ title, body, date, image });
+            res.status(200).json(updatedNews);
+        } else {
+            res.status(404).json({ message: 'News not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-
-    await news.update({ title, body, user_id, date, image });
-
-    res.status(200).json({ success: true, data: news });
-  } catch (error) {
-    console.error('Error al editar noticia:', error);
-    res.status(500).json({ success: false, error: 'Error interno del servidor' });
-  }
 };
+
 
 export const deleteNews = async (req: Request, res: Response) => {
-  try {
     const { id } = req.params;
-
-    const news = await NewsModel.findByPk(id);
-
-    if (!news) {
-      return res.status(404).json({ success: false, error: 'Noticia no encontrada' });
+    try {
+        const news = await NewsModel.findByPk(id);
+        if (news) {
+            await news.destroy();
+            res.status(204).end();
+        } else {
+            res.status(404).json({ message: 'News not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-
-    await news.destroy();
-
-    res.status(200).json({ success: true, message: 'Noticia eliminada con éxito' });
-  } catch (error) {
-    console.error('Error al eliminar el Libro:', error);
-    res.status(500).json({ success: false, error: 'Error interno del servidor' });
-  }
 };
 
+export const getOneNews = async (req: Request, res: Response) => {
+    const idNews = req.params.id;
+    try {
+        const news = await NewsModel.findOne({ where: { id: idNews }});
+        if (news) {
+            res.status(200).json(news);
+        } else {
+            res.status(404).json({ message: 'News not found' });
+        }
+    } catch(error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }   
+}
