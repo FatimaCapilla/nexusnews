@@ -1,5 +1,5 @@
 // Método GET
-const url='http://localhost:3008/api/news'
+const url='http://localhost:3000/api/news'
 
 export const getNews = async () => {  
     try {  
@@ -14,7 +14,7 @@ export const getNews = async () => {
 
 export const getOneNews = async (id) =>{
   try{
-    const response = await fetch(`http://localhost:3008/api/news/${id}`);
+    const response = await fetch(`http://localhost:3000/api/news/${id}`);
     const data = await response.json()
     return data
   } catch(error){
@@ -23,7 +23,7 @@ export const getOneNews = async (id) =>{
 }
 
 export const deleteNews = async (id) => {
-  await fetch(`http://localhost:3008/api/news/${id}`, {method:"DELETE"}
+  await fetch(`http://localhost:3000/api/news/${id}`, {method:"DELETE"}
   ).then(response => {
       if (response.ok) {
         const confirmDelete = window.confirm("¿Estás seguro que deseas borrar la noticia?"); 
