@@ -3,8 +3,7 @@ const URLAPI_NEWS = 'http://www.localhost:3000/api/news/';
 
 // Función para obtener las noticias
 export const getNews = async () => {
-  const token = localStorage.getItem('token')
-  console.log(token)
+  const token = localStorage.getItem('token');
   const headers = { 'Authorization': `Bearer ${token}` }
   try {
     const response = await axios.get(URLAPI_NEWS, { headers });
@@ -20,8 +19,7 @@ export const getNews = async () => {
 };
 
 export const getOneNews = async (id) => {
-  const token = localStorage.getItem('token')
-  console.log(token)
+  const token = localStorage.getItem('token');
   const headers = { 'Authorization': `Bearer ${token}` }
   try {
     const response = await axios.get(`${URLAPI_NEWS + id}`, { headers });

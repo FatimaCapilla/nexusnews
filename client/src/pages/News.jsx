@@ -10,6 +10,9 @@ const News = () => {
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
 
+  const token = localStorage.getItem('token');
+  if(!token) navigate("/");
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getOneNews(id);
