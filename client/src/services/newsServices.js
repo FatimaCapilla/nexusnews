@@ -1,26 +1,32 @@
 import axios from "axios";
-const URLAPI_NEWS = 'http://www.localhost:3000/api/news';
+const URLAPI_NEWS = 'http://www.localhost:3000/api/news/';
 
 export const getOneNews = async (id) =>{
   try{
-    const response = await fetch(`http://localhost:3000/api/news/${id}`);
-    const data = await response.json()
-    return data
+    const response = await axios.get(`${URLAPI_NEWS+id}`);
+    
+    return response.data
   } catch(error){
     console.error('Error');
   }
 }
 
 export const deleteNews = async (id) => {
-  await fetch(`http://localhost:3000/api/news/${id}`, {method:"DELETE"}
-  ).then(response => {
-      if (response.ok) {
-        const confirmDelete = window.confirm("¿Estás seguro que deseas borrar la noticia?"); 
-        if (confirmDelete){
-           alert('Eliminado correctamente');
-        }
-      }});
-} 
+  try {
+    const token = localStorage.getItem('token');
+    const headers = {'Authorization': `Bearer ${token}`};
+    const confirmDelete = window.confirm("¿Estás seguro que deseas borrar la noticia?");
+    if (confirmDelete) {
+      const response = await axios.delete(`${URLAPI_NEWS}${id}`, {headers});
+      if (response.status === 200) {
+        alert('Eliminado correctamente');
+      }
+    }
+  } catch(error) {
+    console.error('Error deleting news:', error);
+    throw error;
+  }
+}
 
 
 
