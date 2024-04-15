@@ -31,9 +31,14 @@ const News = () => {
 
   return (
     <div className='news-model'>
+      <div className="buttons-container">
       {userRole === 'admin' && (
-        <button className="delete-button" onClick={handleDelete}>Eliminar</button>
+      <button className="update-button" onClick={()=> navigate("/update")}>Actualizar</button>
       )}
+      {userRole === 'admin' && (
+      <button className="delete-button" onClick={handleDelete}>Eliminar</button>
+      )}
+   </div>
       {data ? (
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1><br />
