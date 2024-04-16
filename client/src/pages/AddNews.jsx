@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const AddNews = () => {
     const [title, setTitle] = useState('');
@@ -36,6 +36,7 @@ const AddNews = () => {
               setBody('');
               setImage('');
               setDate('');
+              return <Navigate to="/news" />
           } else {
               Swal.fire({
                   title: 'Error',

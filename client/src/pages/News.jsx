@@ -31,7 +31,7 @@ const News = () => {
         const response = await deleteNews(id);
         if (response.status === 200) {
           alert('Eliminado correctamente');
-          return <Navigate to="/index" />
+          return <Navigate to="/news" />
         }
       }
       catch (error) {

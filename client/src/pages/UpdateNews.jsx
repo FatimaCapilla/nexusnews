@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { getOneNews, updateNews } from '../services/newsServices';
 import Swal from 'sweetalert2';
 
@@ -50,6 +50,7 @@ const UpdateNews = () => {
           text: '¡Tu noticia ha sido actualizada!',
           icon: 'success',
         });
+        return <Navigate to="/news" />
       } else {
         Swal.fire({
           title: 'Error',
