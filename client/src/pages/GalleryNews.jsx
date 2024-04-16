@@ -41,11 +41,9 @@ const GalleryNews = () => {
       </div>
       <div className="gallery-header">
         <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
-        {userRole === 'admin' && (
           <div className="flex space-x-4">
             <button onClick={() => navigate("/news/add")} className="gallery-button">Añadir noticia</button>
           </div>
-        )}
       </div>
 
       <div className="gallery">

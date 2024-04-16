@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getOneNews, updateNews } from '../services/newsServices';
 import Swal from 'sweetalert2';
 
@@ -51,7 +51,7 @@ const UpdateNews = () => {
           text: '¡Tu noticia ha sido actualizada!',
           icon: 'success',
         });
-        navigate("/news");
+        navigate(`/news/${id}`);
       } else {
         Swal.fire({
           title: 'Error',
@@ -128,6 +128,10 @@ const UpdateNews = () => {
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
             </div>
             <div className="flex items-center justify-end mt-4">
+              <Link to={`/news/${id}`}
+                className="ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                Cancelar
+              </Link>
               <button
                 type="submit"
                 className="ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
@@ -138,7 +142,8 @@ const UpdateNews = () => {
         </div>
       </div>
     </div>
-  )};
+  )
+};
 
 
 export default UpdateNews;
