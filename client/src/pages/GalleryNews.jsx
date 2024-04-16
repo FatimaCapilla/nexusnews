@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getNews } from "../services/newsServices";
 import "./GalleryNews.css"
 import { Link, useNavigate, Navigate } from 'react-router-dom';
@@ -43,8 +43,6 @@ const GalleryNews = () => {
         <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
         {userRole === 'admin' && (
           <div className="flex space-x-4">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 1</button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 2</button>
             <button onClick={() => navigate("/news/add")} className="gallery-button">Añadir noticia</button>
           </div>
         )}

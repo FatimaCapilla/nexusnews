@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getOneNews, deleteNews } from '../services/newsServices';
-import { useParams } from "react-router";
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import "../pages/News.css"
 
 const News = () => {
@@ -9,6 +8,10 @@ const News = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
+  const [message] = useState('');
+
+  const token = localStorage.getItem('token');
+  if(!token) navigate("/");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +40,6 @@ const News = () => {
     }
   }
 
-
   return (
     <div className='news-model'>
       <div className="buttons-container">
@@ -63,3 +65,4 @@ const News = () => {
 }
 
 export default News;
+

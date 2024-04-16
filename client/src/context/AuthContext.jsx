@@ -1,4 +1,4 @@
-import React, { useState,  useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 export const AuthContext = React.createContext();
@@ -6,7 +6,7 @@ export const AuthContext = React.createContext();
 // Proveedor del contexto para gestionar el estado de inicio de sesión
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState([]);
+    const [dataUser, setDataUser] = useState(false);
 
     useEffect(() => {
         // Verificar si el usuario ya está autenticado al cargar la página
@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
                 localStorage.setItem('token', token);
                 setLoggedIn(true);
                 setDataUser(response.data.role);
-               
             } else {
                 throw new Error('Credenciales incorrectas');
             }
@@ -42,14 +41,22 @@ const AuthProvider = ({ children }) => {
         setLoggedIn(false);
     };
 
+    // Función del Dashboard
+    const Dashboard = () => {
+        // Verificar si el usuario está autenticado y es administrador
+        const isAdmin = loggedIn && dataUser === 'admin';
+    }
+    
     return (
-        <AuthContext.Provider value={{ loggedIn, login, logout }}>
+        <AuthContext.Provider value={{ loggedIn, login, logout, dataUser, setDataUser }}>
+            {/* Renderiza el componente Dashboard dentro del proveedor de contexto */}
+            <Dashboard />
             {children}
         </AuthContext.Provider>
     );
 };
-export default AuthProvider;
- //Hook personalizado para acceder al contexto de autenticación
- export const useAuth = () => useContext(AuthContext);
- 
 
+export default AuthProvider;
+
+// Hook personalizado para acceder al contexto de autenticación
+export const useAuth = () => useContext(AuthContext);

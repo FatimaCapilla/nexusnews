@@ -1,7 +1,7 @@
 import axios from "axios";
-const URLAPI_NEWS = 'http://www.localhost:3000/api/news/';
 
-// Función para obtener las noticias
+const URLAPI_NEWS = 'http://localhost:3000/api/news/';
+
 export const getNews = async () => {
   const token = localStorage.getItem('token');
   const headers = { 'Authorization': `Bearer ${token}` }
@@ -42,3 +42,28 @@ export const deleteNews = async (id) => {
   }
 }
 
+export const updateNews = async (id, updatedData) => {
+  const token = localStorage.getItem('token');
+  const headers = { 'Authorization': `Bearer ${token}` };
+  try {
+    const response = await axios.put(`${URLAPI_NEWS}${id}`, updatedData, { headers });
+    if (response.status === 200) {
+      return {
+        success: true,
+        data: response.data
+      };
+    } else {
+      return {
+        success: false,
+        message: 'No se pudo actualizar la noticia'
+      };
+    }
+  } catch (error) {
+    console.error('Error al enviar la solicitud:', error);
+    return {
+      success: false,
+      message: 'Hubo un problema al intentar actualizar tu noticia. Por favor, inténtalo de nuevo más tarde.',
+      error
+    };
+  }
+};
