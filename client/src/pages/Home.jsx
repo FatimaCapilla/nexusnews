@@ -46,15 +46,13 @@ const Home = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="py-8">
                             <center>
-                                <span className="text-2xl text-[#EEF0E5] font-semibold">Iniciar Sesión</span>
+                                <span className="text-2xl text-[#EEF0E5] font-semibold">Inicio de sesión</span>
                             </center>
                         </div>
                         <div>
-                            <label className="block font-medium text-[#EEF0E5] text-sm" htmlFor="email">Email</label>
                             <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
-                            <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
                             <div className="relative">
                                 <input id="password" type={showPassword ? 'text' : 'password'}
                                     name="password"
@@ -65,19 +63,19 @@ const Home = () => {
                                     className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
-                                        {showPassword ? 'Ocultar Contraseña' : 'Mostrar Contraseña'}
+                                        {showPassword ? 'Ocultar' : 'Mostrar'}
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-center justify-end mt-4">
-                            <button type="submit" className="ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <button type="submit" className="inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar Sesión
                             </button>
                         </div>
                     </form>
                 </div>
-                <button onClick={() => navigate("/register")} className="ms-4 inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
+                <button onClick={() => navigate("/register")} className="inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
                     Registro nuevos usuarios
                 </button>
             </div>
