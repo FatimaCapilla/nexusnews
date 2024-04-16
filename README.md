@@ -1,6 +1,6 @@
 
 
-<h1>NexusNews 🗞️🔍</h1>
+<h1>🔍 NexusNews 🗞️</h1>
 
 
 # Index
