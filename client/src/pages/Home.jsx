@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { login } from '../services/usersServices';
+import Swal from 'sweetalert2';
 
 const Home = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
     const navigate = useNavigate();
-    const token = localStorage.getItem('token')
+    const { setLoggedIn } = useAuth();
 
     const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
         setShowPassword(!showPassword);
@@ -16,26 +19,18 @@ const Home = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al iniciar sesión');
-            }
-
-            const { token, role } = await response.json();
-
-            localStorage.setItem('token', token);
-            localStorage.setItem('role', role);
-
-            navigate('/news');
+            const response = await login(email, password);
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('role', response.role);
+            setLoggedIn(true);
+            navigate("/news");
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al iniciar sesión. Por favor, inténtalo de nuevo.',
+                icon: 'error',
+            });
         }
     };
 

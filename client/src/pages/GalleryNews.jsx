@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useAuth } from "../context/AuthContext";
 import "./GalleryNews.css"
-import { Link, useNavigate, Navigate, useLoaderData } from 'react-router-dom';
+import { Link, useNavigate, useLoaderData } from 'react-router-dom';
 
 const GalleryNews = () => {
   const navigate = useNavigate();
-
+  const { setLoggedIn, loggedIn } = useAuth();
   const news = useLoaderData();
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    setLoggedIn(false);
   }
 
   return (

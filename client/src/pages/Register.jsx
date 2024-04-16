@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../services/usersServices';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -42,37 +42,22 @@ const Register = () => {
             }
 
             // Realizar la solicitud POST con Axios
-            const response = await axios.post('http://localhost:3000/api/users/register', {
-                email,
-                password,
-                confirmPassword,
-            });
+            const response = await register(email, password, confirmPassword);
 
             // Verificar si la solicitud fue exitosa
-            if (response.status === 201) {
+            if (response) {
                 Swal.fire({
                     title: 'Registro exitoso',
                     text: '¡Tu cuenta ha sido creada!',
                     icon: 'success',
                 });
-                // Limpiar los campos del formulario
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
                 navigate("/");
-            } else {
-                // Manejar errores si la solicitud no fue exitosa
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
-                    icon: 'error',
-                });
             }
         } catch (error) {
             console.error('Error al intentar registrar:', error);
             Swal.fire({
                 title: 'Error',
-                text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+                text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo.',
                 icon: 'error',
             });
         }
