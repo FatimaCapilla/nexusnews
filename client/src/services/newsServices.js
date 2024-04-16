@@ -30,6 +30,18 @@ export const getOneNews = async (id) => {
   }
 };
 
+export const getById = async (id) => {
+  const token = localStorage.getItem('token');
+  const headers = { 'Authorization': `Bearer ${token}` };
+  try {
+    const response = await axios.get(`${URLAPI_NEWS}${id}`, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching news with ID ${id}:`, error);
+    throw error;
+  }
+};
+
 export const deleteNews = async (id) => {
   try {
     const token = localStorage.getItem('token');

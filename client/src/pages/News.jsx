@@ -44,7 +44,7 @@ const News = () => {
     <div className='news-model'>
       <div className="buttons-container">
         {userRole === 'admin' && (
-          <button className="update-button" onClick={() => navigate("/update")}>Actualizar</button>
+          <button className="update-button" onClick={() => navigate(`/update/${id}`)}>Actualizar</button>
         )}
         {userRole === 'admin' && (
           <button className="delete-button" onClick={handleDelete}>Eliminar</button>
