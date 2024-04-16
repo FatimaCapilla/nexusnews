@@ -2,11 +2,11 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
@@ -15,37 +15,23 @@ const Register = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Verificar si las contraseñas coinciden
-        if (password === confirmPassword) {
-            // Procesar el formulario
-            console.log('Contraseñas coinciden, se puede enviar el formulario');
-            // Aquí puedes enviar el formulario o realizar otras acciones
-        } else {
-            // Mostrar un mensaje de error o realizar alguna acción si las contraseñas no coinciden
-            console.log('Las contraseñas no coinciden');
-            setPasswordsMatch(false);
-        }
-    };
+    const schema = yup.object().shape({
+        email: yup.string().email().required(),
+        password: yup.string().min(6).required(),
+        confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir').required(),
+    });
 
-    const handleRegister = async () => {
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const handleRegister = async (data) => {
         try {
-            // Verificar si las contraseñas coinciden
-            if (password !== confirmPassword) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Las contraseñas no coinciden',
-                    icon: 'error',
-                });
-                return;
-            }
-
             // Realizar la solicitud POST con Axios
             const response = await axios.post('http://localhost:3000/api/users/register', {
-                email,
-                password,
-                confirmPassword,
+                email: data.email,
+                password: data.password,
+                confirmPassword: data.confirmPassword,
             });
 
             // Verificar si la solicitud fue exitosa
@@ -56,9 +42,6 @@ const Register = () => {
                     icon: 'success',
                 });
                 // Limpiar los campos del formulario
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
                 navigate("/");
             } else {
                 // Manejar errores si la solicitud no fue exitosa
@@ -82,7 +65,7 @@ const Register = () => {
         <div className="font-sans text-gray-900">
             <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
                 <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(handleRegister)}>
                         <div className="py-8">
                             <center>
                                 <span className="text-2xl text-[#EEF0E5] font-semibold">Registro de usuarios</span>
@@ -95,10 +78,9 @@ const Register = () => {
                                 type='email'
                                 name='email'
                                 placeholder='Email'
-                                value={email}
-                                required
-                                onChange={(e) => setEmail(e.target.value)}
+                                {...register('email')}
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
                         </div>
                         <div className="mt-4">
                             <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
@@ -110,8 +92,7 @@ const Register = () => {
                                     placeholder="Contraseña"
                                     required
                                     autoComplete="new-password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    {...register('password')}
                                     className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
@@ -121,6 +102,7 @@ const Register = () => {
                                     </button>
                                 </div>
                             </div>
+                            {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
                         </div>
                         <div className="mt-4">
                             <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="confirmPassword">Confirmar contraseña</label>
@@ -131,15 +113,13 @@ const Register = () => {
                                 placeholder="Confirmar contraseña"
                                 required
                                 autoComplete="new-password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                className={`w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5] ${!passwordsMatch ? 'border-red-500' : ''}`} />
-                            {!passwordsMatch && <p className="text-red-500 text-xs">Las contraseñas no coinciden</p>}
-
+                                {...register('confirmPassword')}
+                                className={`w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5] ${errors.confirmPassword ? 'border-red-500' : ''}`} />
+                            {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword.message}</p>}
                         </div>
                         <div className="flex items-center justify-end mt-4">
                             <button
-                                onClick={handleRegister}
+                                type="submit"
                                 className="ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Registrarse
                             </button>
@@ -157,3 +137,4 @@ const Register = () => {
 };
 
 export default Register;
+
