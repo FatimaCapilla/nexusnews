@@ -1,11 +1,12 @@
-import  { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const Home = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
     const navigate = useNavigate();
+    const token = localStorage.getItem('token')
 
     const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
         setShowPassword(!showPassword);
@@ -38,7 +39,8 @@ const Home = () => {
         }
     };
 
-    return (
+    if(token) return <Navigate to="/gallery" />
+    else return (
         <div className="font-sans text-gray-900">
             <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
                 <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">

@@ -10,6 +10,9 @@ const News = () => {
   const [userRole, setUserRole] = useState('');
   const [message] = useState('');
 
+  const token = localStorage.getItem('token');
+  if(!token) navigate("/");
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getOneNews(id);
@@ -25,43 +28,28 @@ const News = () => {
 
     if (confirmDelete) {
       try {
-        const response = await deleteNews(id);
+        const response = await deleteNews(id).then(navigate("/gallery"));
         if (response.status === 200) {
           alert('Eliminado correctamente');
-          navigate("/gallery"); // Redirigir después de eliminar
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error(error);
       }
     }
   }
 
-  const handleEdit = () => {
-    navigate(`/update/${id}`); // Redirigir al formulario de edición
-  }
-
-  const showMessage = () => {
-    if (message) {
-      return (
-        <div className="success-message">
-          Noticia creada exitosamente.
-        </div>
-      );
-    }
-    return null;
-  }
 
   return (
     <div className='news-model'>
       <div className="buttons-container">
         {userRole === 'admin' && (
-          <button className="update-button" onClick={handleEdit}>Actualizar</button>
+          <button className="update-button" onClick={() => navigate("/update")}>Actualizar</button>
         )}
         {userRole === 'admin' && (
           <button className="delete-button" onClick={handleDelete}>Eliminar</button>
         )}
       </div>
-      {showMessage()}
       {data ? (
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1><br />

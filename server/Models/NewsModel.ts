@@ -10,12 +10,12 @@ const NewsModel = connection_db.define('News', {
     allowNull: false
   },
   title: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING(200),
+    allowNull: false
   },
   body: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING(1000),
+    allowNull: false
   },
   user_id: {
     type: DataTypes.INTEGER,
@@ -27,11 +27,11 @@ const NewsModel = connection_db.define('News', {
   },
   date: {
     type: DataTypes.DATE, // Cambiado a tipo DATE para almacenar fechas
-    allowNull: true,
+    allowNull: false,
   },
   image: {
-    type: DataTypes.STRING(300),
-    allowNull: true,
+    type: DataTypes.STRING,
+    allowNull: false,
   }},{
     timestamps: false
   });
