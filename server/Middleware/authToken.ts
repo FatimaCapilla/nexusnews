@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../config';
+import UserModel from '../Models/UserModel';
 
+// Middleware para verificar el token de autenticación
 export const authToken = (req: Request, res: Response, next: NextFunction) => {
     try {
         const authHeader = req.headers['authorization'];
@@ -15,8 +17,8 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
             if (err) {
                 return res.status(403).send({ error: 'Invalid Token.' });
             }
-            // Agregamos userId a la solicitud decodificada del token
-            (req as any).body.userId = (decoded as { userId: number }).userId;
+            // Agregamos userId al cuerpo de la solicitud decodificada del token
+            (req as any).userId = (decoded as { userId: number }).userId;
             next();
         });
     } catch (error) {
@@ -24,4 +26,3 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
         return res.status(500).send({ error: 'Error en el servidor' });
     }
 };
-
