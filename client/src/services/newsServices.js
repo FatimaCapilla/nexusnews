@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 const URLAPI_NEWS = 'http://localhost:3000/api/news/';
 
@@ -62,9 +63,23 @@ export const updateNews = async (id, updatedData) => {
   const headers = { 'Authorization': `Bearer ${token}` };
   try {
     const response = await axios.put(`${URLAPI_NEWS}${id}`, updatedData, { headers });
-    return response.data;
+    if (response.status === 200) {
+      return {
+        success: true,
+        data: response.data
+      };
+    } else {
+      return {
+        success: false,
+        message: 'No se pudo actualizar la noticia'
+      };
+    }
   } catch (error) {
-    console.error('Error updating news:', error);
-    throw error;
+    console.error('Error al enviar la solicitud:', error);
+    return {
+      success: false,
+      message: 'Hubo un problema al intentar actualizar tu noticia. Por favor, inténtalo de nuevo más tarde.',
+      error
+    };
   }
 };

@@ -1,46 +1,70 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getById, updateNews } from '../services/newsServices';
+import Swal from 'sweetalert2';
 
 const UpdateNews = () => {
+  const { id } = useParams();
   const [news, setNews] = useState({
     title: '',
     body: '',
     image: '',
-    date: ''
+    date: '',
   });
-
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchNewsById = async () => {
       try {
         const newsData = await getById(id);
-        setNews(newsData);
+        if (newsData) {
+          setNews(newsData);
+        }
       } catch (error) {
         console.error('Error fetching news:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cargar la noticia para editar.',
+          icon: 'error',
+        });
       }
     };
 
     fetchNewsById();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const updatedNews = await updateNews(id, news);
-      console.log('Noticia actualizada:', updatedNews);
-    } catch (error) {
-      console.error('Error updating news:', error);
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNews((prevNews) => ({
+    setNews(prevNews => ({
       ...prevNews,
       [name]: value
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await updateNews(id, news);
+      if (result.success) {
+        Swal.fire({
+          title: 'Registro exitoso',
+          text: '¡Tu noticia ha sido actualizada!',
+          icon: 'success',
+        });
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: result.message,
+          icon: 'error',
+        });
+      }
+    } catch (error) {
+      console.error('Error updating news:', error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un error al actualizar la noticia.',
+        icon: 'error',
+      });
+    }
   };
 
   return (
@@ -112,8 +136,8 @@ const UpdateNews = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )};
+
 
 export default UpdateNews;
 
