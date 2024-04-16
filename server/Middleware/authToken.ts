@@ -1,10 +1,6 @@
-import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../config';
-
-interface RequestWithUserId extends Request {
-    userId?: number;
-}
 
 export const authToken = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,11 +11,12 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
             return res.status(401).send({ error: 'No authentication token provided.' });
         }
 
-        jwt.verify(token, SECRET_KEY, (err) => {
+        jwt.verify(token, SECRET_KEY, (err, decoded) => {
             if (err) {
                 return res.status(403).send({ error: 'Invalid Token.' });
             }
-
+            // Agregamos userId a la solicitud decodificada del token
+            (req as any).body.userId = (decoded as { userId: number }).userId;
             next();
         });
     } catch (error) {

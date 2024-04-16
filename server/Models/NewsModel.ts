@@ -2,6 +2,8 @@ import { DataTypes } from "sequelize";
 import connection_db from "../database/connection_db";
 import UserModel from "./UserModel"
 
+
+
 const NewsModel = connection_db.define('News', {
   id: {
     type: DataTypes.INTEGER,

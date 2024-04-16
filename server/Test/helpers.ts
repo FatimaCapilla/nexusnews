@@ -32,12 +32,14 @@ export const wrongUser = {
     email: 'adminuser@gmail.com',
     password: '654321'
 }
+
 // Datos de prueba para la obtención de usuarios
 export const userAdmin = {
     email: 'adminuser@gmail.com',
     password: '123456',
     role: 'admin'
 };
+
 
 
 

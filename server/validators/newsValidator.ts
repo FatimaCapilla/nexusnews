@@ -14,14 +14,11 @@ export const validateCreateNews = [
         .notEmpty().withMessage("The body can't be empty")
         .isLength({ min: 1, max: 1000 }).withMessage("Body must be between 1 and 1000 characters"),
 
-    // check('user_id')
-    //     .exists().withMessage("The user_id is required")
-    //     .notEmpty().withMessage("The user_id can't be empty"),
 
-    // check('date')
-    // .exists().withMessage("The date is required")
-    // .notEmpty().withMessage("The date can't be empty")
-    // .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
+    check('date')
+    .exists().withMessage("The date is required")
+    .notEmpty().withMessage("The date can't be empty")
+    .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
 
     check('image')
         .exists().withMessage("The image is required")
@@ -45,14 +42,12 @@ export const validateUpdateNews = [
         .notEmpty().withMessage("The body can't be empty")
         .isLength({ min: 1, max: 1000 }).withMessage("Body must be between 1 and 1000 characters"),
 
-    // check('user_id')
-    //     .exists().withMessage("The user_id is required")
-    //     .notEmpty().withMessage("The user_id can't be empty"),
 
-    // check('date')
-    // .exists().withMessage("The date is required")
-    // .notEmpty().withMessage("The date can't be empty")
-    // .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
+
+    check('date')
+    .exists().withMessage("The date is required")
+    .notEmpty().withMessage("The date can't be empty")
+    .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
 
 
     check('image')
