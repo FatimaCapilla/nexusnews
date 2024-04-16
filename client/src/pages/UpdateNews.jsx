@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getById, updateNews } from '../services/newsServices';
+import { getOneNews, updateNews } from '../services/newsServices';
 import Swal from 'sweetalert2';
 
 const UpdateNews = () => {
@@ -15,7 +15,7 @@ const UpdateNews = () => {
   useEffect(() => {
     const fetchNewsById = async () => {
       try {
-        const newsData = await getById(id);
+        const newsData = await getOneNews(id);
         if (newsData) {
           setNews(newsData);
         }

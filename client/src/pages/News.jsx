@@ -39,7 +39,6 @@ const News = () => {
     }
   }
 
-
   return (
     <div className='news-model'>
       <div className="buttons-container">
