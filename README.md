@@ -46,8 +46,10 @@
   ```
   npm run dev
   ```
-This will start the server __http://localhost:3000__ using the database on MySQL Workbench.
-  ```
+  This will start the server __http://localhost:3000__ using the database on MySQL Workbench.
+
+
+  
 * Copy code in your terminal to enter in the repository front folder:
   ```
   cd client
