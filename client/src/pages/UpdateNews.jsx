@@ -1,12 +1,8 @@
-
-// Importar las dependencias necesarias
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getById, updateNews } from '../services/newsServices';
 
-// Definir el componente
 const UpdateNews = () => {
-  // Estado para almacenar la noticia
   const [news, setNews] = useState({
     title: '',
     body: '',
@@ -14,14 +10,11 @@ const UpdateNews = () => {
     date: ''
   });
 
-  // Obtener el ID de la URL usando useParams
   const { id } = useParams();
 
-  // Efecto para obtener la noticia por su ID cuando el componente se monta o el ID cambia
   useEffect(() => {
     const fetchNewsById = async () => {
       try {
-        // Llamar a getById con el ID obtenido de la URL
         const newsData = await getById(id);
         setNews(newsData);
       } catch (error) {
@@ -30,13 +23,11 @@ const UpdateNews = () => {
     };
 
     fetchNewsById();
-  }, [id]); // Ejecutar efecto cuando el ID cambie
+  }, [id]);
 
-  // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+    e.preventDefault();
     try {
-      // Llamar a updateNews con el ID y los datos actualizados de la noticia
       const updatedNews = await updateNews(id, news);
       console.log('Noticia actualizada:', updatedNews);
     } catch (error) {
@@ -44,7 +35,6 @@ const UpdateNews = () => {
     }
   };
 
-  // Función para manejar cambios en los campos de entrada
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNews((prevNews) => ({
@@ -53,7 +43,6 @@ const UpdateNews = () => {
     }));
   };
 
-  // Renderizar el formulario
   return (
     <div className="font-sans text-gray-900">
       <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
@@ -126,5 +115,5 @@ const UpdateNews = () => {
   );
 };
 
-// Exportar el componente
 export default UpdateNews;
+

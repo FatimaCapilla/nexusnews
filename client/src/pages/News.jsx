@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getOneNews, deleteNews } from '../services/newsServices';
-import { useParams } from "react-router";
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
 import "../pages/News.css"
 
 const News = () => {
@@ -9,6 +8,7 @@ const News = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
+  const [message] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,28 +25,43 @@ const News = () => {
 
     if (confirmDelete) {
       try {
-        const response = await deleteNews(id).then(navigate("/gallery"));
+        const response = await deleteNews(id);
         if (response.status === 200) {
           alert('Eliminado correctamente');
+          navigate("/gallery"); // Redirigir después de eliminar
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
       }
     }
   }
 
+  const handleEdit = () => {
+    navigate(`/update/${id}`); // Redirigir al formulario de edición
+  }
+
+  const showMessage = () => {
+    if (message) {
+      return (
+        <div className="success-message">
+          Noticia creada exitosamente.
+        </div>
+      );
+    }
+    return null;
+  }
 
   return (
     <div className='news-model'>
       <div className="buttons-container">
         {userRole === 'admin' && (
-          <button className="update-button" onClick={() => navigate("/update/:id")}>Actualizar</button>
+          <button className="update-button" onClick={handleEdit}>Actualizar</button>
         )}
         {userRole === 'admin' && (
           <button className="delete-button" onClick={handleDelete}>Eliminar</button>
         )}
       </div>
+      {showMessage()}
       {data ? (
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1><br />
@@ -62,3 +77,4 @@ const News = () => {
 }
 
 export default News;
+
