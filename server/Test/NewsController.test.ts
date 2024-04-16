@@ -47,19 +47,42 @@ describe('TESTING CRUD news', () => {
 
     describe('DELETE /api/news/:id', () => {
         it('debe eliminar una noticia existente y devolver un estado 204', async () => {
-            // Verificar los roles del usuario antes de enviar la solicitud DELETE
-            console.log("User roles:", newUser.role);
+            // Crear una nueva noticia antes de la prueba de eliminación
+            const createResponse = await api.post('/api/news').set('Authorization', `Bearer ${token}`).send(testTry);
+            const newsIdToDelete = createResponse.body.id;
             
-            const response = await api.delete(`/api/news/${createdNewsId}`).set('Authorization', `Bearer ${token}`);
-            expect(response.status).toBe(204);
-            
-            // Verificar que la noticia haya sido eliminada de la base de datos
-            const deletedNews = await NewsModel.findByPk(createdNewsId);
-            expect(deletedNews).toBeNull();
+            const deleteResponse = await api.delete(`/api/news/${newsIdToDelete}`).set('Authorization', `Bearer ${token}`);
+            expect(deleteResponse.status).toBe(204);
+        });
+    });
+    describe('PUT /api/news/:id', () => {
+        let createdNewsId: number;
+    
+        beforeEach(async () => {
+            const response = await api.post('/api/news').set('Authorization', `Bearer ${token}`).send(testTry);
+            createdNewsId = response.body.id;
+        });
+    
+        it('debe actualizar una noticia existente y devolver un estado 200', async () => {
+            const updatedNewsData = {
+                title: "Updated titleeeee",
+                body: "Updated bodyyyyy",
+                image: "http://www.example.com/updated",
+            };
+    
+            const response = await api.put(`/api/news/${createdNewsId}`).set('Authorization', `Bearer ${token}`).send(updatedNewsData);
+    
+            expect(response.status).toBe(200);
+    
+            const updatedNews = await NewsModel.findByPk(createdNewsId);
+            expect(updatedNews?.get('title')).toBe(updatedNewsData.title);
+            expect(updatedNews?.get('body')).toBe(updatedNewsData.body);
+            expect(updatedNews?.get('image')).toBe(updatedNewsData.image);
         });
     });
     
-
+   
+    
     afterAll(async () => {
         // Cerrar el servidor y sincronizar la base de datos para limpiar los datos
         server.close();

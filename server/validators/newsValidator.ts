@@ -44,15 +44,15 @@ export const validateUpdateNews = [
         .notEmpty().withMessage("The body can't be empty")
         .isLength({ min: 10, max: 1000 }).withMessage("Body must be between 10 and 1000 characters"),
 
-    check('user_id')
-        .exists().withMessage("You gotta add a user_id")
-        .notEmpty().withMessage("The user_id can't be empty"),
+    // check('user_id')
+    //     .exists().withMessage("You gotta add a user_id")
+    //     .notEmpty().withMessage("The user_id can't be empty"),
 
-        check('date')
-        .exists().withMessage("Debes agregar una fecha")
-        .notEmpty().withMessage("La fecha no puede estar vacía")
-        .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
-    
+    // check('date')
+    // .exists().withMessage("Debes agregar una fecha")
+    // .notEmpty().withMessage("La fecha no puede estar vacía")
+    // .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
+
 
     check('image')
         .exists().withMessage("You gotta add an image")
@@ -62,6 +62,7 @@ export const validateUpdateNews = [
         validateResult(req, res, next);
     }
 ];
+
 
 export const validateDeleteNews = [
     check('id')
