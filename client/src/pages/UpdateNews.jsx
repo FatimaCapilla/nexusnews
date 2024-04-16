@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getOneNews, updateNews } from '../services/newsServices';
 import Swal from 'sweetalert2';
 
 const UpdateNews = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [news, setNews] = useState({
     title: '',
     body: '',
@@ -50,7 +51,7 @@ const UpdateNews = () => {
           text: '¡Tu noticia ha sido actualizada!',
           icon: 'success',
         });
-        return <Navigate to="/news" />
+        navigate("/news");
       } else {
         Swal.fire({
           title: 'Error',

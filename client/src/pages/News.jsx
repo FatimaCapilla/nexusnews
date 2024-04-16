@@ -8,10 +8,6 @@ const News = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
-  const [message] = useState('');
-
-  const token = localStorage.getItem('token');
-  if(!token) navigate("/");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,8 +27,8 @@ const News = () => {
         const response = await deleteNews(id);
         if (response.status === 200) {
           alert('Eliminado correctamente');
-          return <Navigate to="/news" />
         }
+        navigate("/news")
       }
       catch (error) {
         console.error(error);
