@@ -25,12 +25,21 @@
   ```
   git clone https://github.com/FatimaCapilla/nexusnews.git
   ```
-* Copy code in your terminal:
+* Copy code in your terminal to enter in the repository folder:
   ```
-  
+  cd server
   ```
-  <br>
-To enter the repository folder.
+  * Copy code in your terminal:
+  ```
+  npm i
+  * Copy code in your terminal to enter in the repository folder:
+  ```
+  cd client
+  ```
+  * Copy code in your terminal:
+  ```
+  npm i
+
 
 
 2. **Create the file __.env__**
