@@ -6,38 +6,46 @@ import News from '../pages/News'
 import Register from '../pages/Register'
 import LayoutPublic from '../layout/LayoutPublic'
 import UpdateNews from '../pages/UpdateNews'
+import LayoutPrivate from "../layout/LayoutPrivate";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <LayoutPublic />,
-      children: [
-        {
-          index: true,
-          element: <Home />, 
-        },
-        {
-        path: "/gallery",
-        element: <GalleryNews />, 
-        }, 
-        {
-            path: "/add",
-            element: <AddNews />, 
-        }, 
-        {
-            path: "/news/:id",
-            element: <News />, 
-        }, 
-        {
-            path: "/register",
-            element: <Register />, 
-        },
-        {
-            path: "/update",
-            element: <UpdateNews />, 
-        }
-      ]
-    },
+  {
+    path: "/",
+    element: <LayoutPublic />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/index",
+        element: <LayoutPrivate />,
+        children: [
+          {
+            index: true,
+            element: <GalleryNews />,
+          },
+          {
+            path: "/index/news/:id",
+            element: <News />,
+          },
+          {
+            path: "/index/add",
+            element: <AddNews />,
+          },
+          {
+            path: "/index/update",
+            element: <UpdateNews />,
+          }
+        ]
+      }
+    ]
+  },
+
 ]);
-  
+
 export default router;

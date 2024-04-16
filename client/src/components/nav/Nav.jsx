@@ -8,7 +8,7 @@ const Nav = () => {
   if (token) return (
     <nav>
       <div className='nav'>
-        <Link to="/gallery" className='logo-container'>
+        <Link to="/index" className='logo-container'>
           <img src={logo} alt="Nexus News logo" className='logo' />
         </Link>
       </div>

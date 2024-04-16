@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getOneNews, deleteNews } from '../services/newsServices';
 import { useParams } from "react-router";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import "../pages/News.css"
 
 const News = () => {
@@ -9,9 +9,6 @@ const News = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
-
-  const token = localStorage.getItem('token');
-  if(!token) navigate("/");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +25,10 @@ const News = () => {
 
     if (confirmDelete) {
       try {
-        const response = await deleteNews(id).then(navigate("/gallery"));
+        const response = await deleteNews(id);
         if (response.status === 200) {
           alert('Eliminado correctamente');
+          return <Navigate to="/index" />
         }
       }
       catch (error) {
@@ -44,7 +42,7 @@ const News = () => {
     <div className='news-model'>
       <div className="buttons-container">
         {userRole === 'admin' && (
-          <button className="update-button" onClick={() => navigate("/update")}>Actualizar</button>
+          <button className="update-button" onClick={() => navigate("/index/update")}>Actualizar</button>
         )}
         {userRole === 'admin' && (
           <button className="delete-button" onClick={handleDelete}>Eliminar</button>

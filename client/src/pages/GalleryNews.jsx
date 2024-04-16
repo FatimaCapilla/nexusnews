@@ -34,8 +34,7 @@ const GalleryNews = () => {
     localStorage.setItem('token', "");
   }
 
-  if (!token) return <Navigate to="/" />
-  else return (
+  return (
     <>
       <div className="flex items-center justify-end mt-4">
         <button onClick={() => { handleLogOut(); navigate('/'); }} className="mr-10 ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Log out</button>
@@ -46,7 +45,7 @@ const GalleryNews = () => {
           <div className="flex space-x-4">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 1</button>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 2</button>
-            <button onClick={() => navigate("/add")} className="gallery-button">Añadir noticia</button>
+            <button onClick={() => navigate("/index/add")} className="gallery-button">Añadir noticia</button>
           </div>
         )}
       </div>
@@ -58,7 +57,7 @@ const GalleryNews = () => {
             <div className="gallery-news-details">
               <div className="title-arrow">
                 <h4>{item.title}</h4>
-                <Link to={`/news/${item.id}`}>
+                <Link to={`/index/news/${item.id}`}>
                   <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
                 </Link>
               </div>

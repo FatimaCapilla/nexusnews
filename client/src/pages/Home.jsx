@@ -33,14 +33,13 @@ const Home = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('role', role);
 
-            navigate('/gallery');
+            navigate('/index');
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
         }
     };
 
-    if(token) return <Navigate to="/gallery" />
-    else return (
+    return (
         <div className="font-sans text-gray-900">
             <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
                 <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">

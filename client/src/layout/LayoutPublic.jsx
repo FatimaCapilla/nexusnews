@@ -5,9 +5,9 @@ import { Outlet } from 'react-router-dom';
 const LayoutPublic = () => {
   return (
     <>
-    < Nav />
-    < Outlet />
-    < Footer />
+      < Nav />
+        < Outlet />
+      < Footer />
     </>
   )
 }
