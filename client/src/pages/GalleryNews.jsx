@@ -1,37 +1,15 @@
 import { useState, useEffect } from 'react';
-import { getNews } from "../services/newsServices";
 import "./GalleryNews.css"
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate, useLoaderData } from 'react-router-dom';
 
 const GalleryNews = () => {
-  const [news, setNews] = useState([]);
-  const [userRole, setUserRole] = useState('');
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await getNews();
-        console.log("Data from getNews():", response);
-        if (response && Array.isArray(response)) {
-          setNews(response);
-        } else {
-          console.error("Data from getNews() is not in the expected format:", response);
-        }
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      }
-    };
-
-    const userRole = localStorage.getItem('role');
-    setUserRole(userRole);
-
-    fetchNews();
-  }, [token]);
+  const news = useLoaderData();
 
   const handleLogOut = () => {
-    localStorage.setItem('token', "");
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
 
   return (

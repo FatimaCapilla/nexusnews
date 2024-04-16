@@ -7,10 +7,6 @@ export const getNews = async () => {
   const headers = { 'Authorization': `Bearer ${token}` }
   try {
     const response = await axios.get(URLAPI_NEWS, { headers });
-    console.log(response)
-    // if (!response.ok) {
-    //   throw new Error('Error al obtener las noticias');
-    // }
     return response.data
   } catch (error) {
     console.error('Error fetching news:', error);

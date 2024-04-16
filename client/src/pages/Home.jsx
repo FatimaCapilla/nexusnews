@@ -50,7 +50,7 @@ const Home = () => {
                             </center>
                         </div>
                         <div>
-                            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            <input id="email" autoComplete="on" type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
                             <div className="relative">
