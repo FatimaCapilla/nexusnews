@@ -25,21 +25,6 @@
   ```
   git clone https://github.com/FatimaCapilla/nexusnews.git
   ```
-* Copy code in your terminal to enter in the repository folder:
-  ```
-  cd server
-  ```
-* Copy code in your terminal:
-  ```
-  npm i
-* Copy code in your terminal to enter in the repository folder:
-  ```
-  cd client
-  ```
-* Copy code in your terminal:
-  ```
-  npm i
-  ```
 
 2. **Create the file __.env__**
    
@@ -49,7 +34,25 @@
 
 3. **Install Dependencies:** 
 
-* Copy code:
+* Copy code in your terminal to enter in the repository back folder:
+  ```
+  cd server
+  ```
+* Copy code in your terminal:
+  ```
+  npm install
+
+* Copy code to make the server run:
+  ```
+  npm run dev
+  ```
+This will start the server __http://localhost:3000__ using the database on MySQL Workbench.
+  ```
+* Copy code in your terminal to enter in the repository front folder:
+  ```
+  cd client
+  ```
+* Copy code in your terminal:
   ```
   npm install
   ```
@@ -57,7 +60,6 @@
   ```
   npm run dev
   ```
-This will start the server __http://localhost:3000__ using the database on MySQL Workbench.
 
 ## Initialize the Postman
 
