@@ -21,24 +21,32 @@ const News = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    try {
-      await deleteNews(id);
-      navigate("/gallery");
-    } catch (error) {
-      console.error(error);
+    const confirmDelete = window.confirm("¿Estás seguro que deseas borrar la noticia?");
+
+    if (confirmDelete) {
+      try {
+        const response = await deleteNews(id).then(navigate("/gallery"));
+        if (response.status === 200) {
+          alert('Eliminado correctamente');
+        }
+      }
+      catch (error) {
+        console.error(error);
+      }
     }
   }
+
 
   return (
     <div className='news-model'>
       <div className="buttons-container">
-      {userRole === 'admin' && (
-      <button className="update-button" onClick={()=> navigate("/update")}>Actualizar</button>
-      )}
-      {userRole === 'admin' && (
-      <button className="delete-button" onClick={handleDelete}>Eliminar</button>
-      )}
-   </div>
+        {userRole === 'admin' && (
+          <button className="update-button" onClick={() => navigate("/update/:id")}>Actualizar</button>
+        )}
+        {userRole === 'admin' && (
+          <button className="delete-button" onClick={handleDelete}>Eliminar</button>
+        )}
+      </div>
       {data ? (
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1><br />

@@ -1,35 +1,61 @@
-import { useState } from 'react';
-import { updateNews } from '../services/newsServices';
 
+// Exportar el componente
+
+// Importar las dependencias necesarias
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getById, updateNews } from '../services/newsServices';
+
+// Definir el componente
 const UpdateNews = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [image, setImage] = useState('');
-  const [date, setDate] = useState('');
+  // Estado para almacenar la noticia
+  const [news, setNews] = useState({
+    title: '',
+    body: '',
+    image: '',
+    date: ''
+  });
 
+  // Obtener el ID de la URL usando useParams
+  const { id } = useParams();
+
+  // Efecto para obtener la noticia por su ID cuando el componente se monta o el ID cambia
+  useEffect(() => {
+    const fetchNewsById = async () => {
+      try {
+        // Llamar a getById con el ID obtenido de la URL
+        const newsData = await getById(id);
+        setNews(newsData);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      }
+    };
+
+    fetchNewsById();
+  }, [id]); // Ejecutar efecto cuando el ID cambie
+
+  // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
     try {
-      // Creas un objeto con los datos actualizados de la noticia
-      const updatedNewsData = {
-        title: title,
-        body: body,
-        image: image,
-        date: date
-      };
-
-      // Llamas a la función de actualización con el ID de la noticia y los datos actualizados
-      const newsId = 'ID_DE_LA_NOTICIA_A_ACTUALIZAR'; // Reemplaza 'ID_DE_LA_NOTICIA_A_ACTUALIZAR' con el ID real de la noticia
-      const updatedNews = await updateNews(newsId, updatedNewsData);
+      // Llamar a updateNews con el ID y los datos actualizados de la noticia
+      const updatedNews = await updateNews(id, news);
       console.log('Noticia actualizada:', updatedNews);
-
-      // Aquí podrías manejar cualquier lógica adicional después de actualizar la noticia
     } catch (error) {
-      console.error('Error al actualizar la noticia:', error);
-      // Aquí podrías manejar el error de manera adecuada, por ejemplo, mostrando un mensaje de error al usuario
+      console.error('Error updating news:', error);
     }
   };
 
+  // Función para manejar cambios en los campos de entrada
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNews((prevNews) => ({
+      ...prevNews,
+      [name]: value
+    }));
+  };
+
+  // Renderizar el formulario
   return (
     <div className="font-sans text-gray-900">
       <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
@@ -47,8 +73,8 @@ const UpdateNews = () => {
                 type='text'
                 name='title'
                 placeholder='Título'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={news.title}
+                onChange={handleChange}
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]"
                 required />
             </div>
@@ -59,9 +85,9 @@ const UpdateNews = () => {
                 type='text'
                 name='body'
                 placeholder='Noticia'
-                value={body}
+                value={news.body}
                 required
-                onChange={(e) => setBody(e.target.value)}
+                onChange={handleChange}
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
             </div>
             <div className="mb-4">
@@ -71,9 +97,9 @@ const UpdateNews = () => {
                 type='text'
                 name='image'
                 placeholder='URL de la imagen'
-                value={image}
+                value={news.image}
                 required
-                onChange={(e) => setImage(e.target.value)}
+                onChange={handleChange}
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
             </div>
             <div className="mb-4">
@@ -83,9 +109,9 @@ const UpdateNews = () => {
                 type='date'
                 name='date'
                 placeholder='Fecha'
-                value={date}
+                value={news.date}
                 required
-                onChange={(e) => setDate(e.target.value)}
+                onChange={handleChange}
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
             </div>
             <div className="flex items-center justify-end mt-4">
@@ -102,4 +128,5 @@ const UpdateNews = () => {
   );
 };
 
+// Exportar el componente
 export default UpdateNews;
