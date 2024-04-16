@@ -1,6 +1,4 @@
 
-// Exportar el componente
-
 // Importar las dependencias necesarias
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
