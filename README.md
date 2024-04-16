@@ -98,10 +98,11 @@ This will run the tests.
 
 # Authors
 
- - Scrum Master: 
- - Product Owner: 
- - Web Developer: 
- - Web Developer: 
+ - Scrum Master: [Elena López](https://github.com/elenalope)
+ - Product Owner: [Beatriz Custodio](https://github.com/BeatrizCPerez)
+ - Web Developer: [Fátima Capilla](https://github.com/FatimaCapilla)
+ - Web Developer: [María Andrea An](https://github.com/mariandrean)
+ - Web Developer: [Nuria Vicente](https://github.com/NuriaVicenteRodriguez)
 
 
 # Contributions
