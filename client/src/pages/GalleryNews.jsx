@@ -45,7 +45,7 @@ const GalleryNews = () => {
           <div className="flex space-x-4">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 1</button>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 2</button>
-            <button onClick={() => navigate("/index/add")} className="gallery-button">Añadir noticia</button>
+            <button onClick={() => navigate("/news/add")} className="gallery-button">Añadir noticia</button>
           </div>
         )}
       </div>
@@ -57,7 +57,7 @@ const GalleryNews = () => {
             <div className="gallery-news-details">
               <div className="title-arrow">
                 <h4>{item.title}</h4>
-                <Link to={`/index/news/${item.id}`}>
+                <Link to={`/news/${item.id}`}>
                   <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
                 </Link>
               </div>

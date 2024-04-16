@@ -33,7 +33,7 @@ const Home = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('role', role);
 
-            navigate('/index');
+            navigate('/news');
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
         }

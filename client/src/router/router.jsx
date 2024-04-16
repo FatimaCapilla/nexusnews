@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/index",
+        path: "/news",
         element: <LayoutPrivate />,
         children: [
           {
@@ -30,22 +30,21 @@ const router = createBrowserRouter([
             element: <GalleryNews />,
           },
           {
-            path: "/index/news/:id",
-            element: <News />,
-          },
-          {
-            path: "/index/add",
+            path: "/news/add",
             element: <AddNews />,
           },
           {
-            path: "/index/update",
+            path: "/news/:id",
+            element: <News />,
+          },
+          {
+            path: "/news/:id/update",
             element: <UpdateNews />,
           }
         ]
       }
     ]
-  },
-
+  }
 ]);
 
 export default router;
