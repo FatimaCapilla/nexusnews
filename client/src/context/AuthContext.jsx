@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 
 export const AuthContext = React.createContext();
 
 // Proveedor del contexto para gestionar el estado de inicio de sesión
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     return (
-        <AuthContext.Provider value={{ loggedIn, dataUser, setDataUser, setLoggedIn }}>
+        <AuthContext.Provider value={{ loggedIn, setLoggedIn, userRole, setUserRole, userId, setUserId }}>
             {children}
         </AuthContext.Provider>
     );

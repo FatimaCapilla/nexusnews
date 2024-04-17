@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login } from '../services/usersServices';
 import Swal from 'sweetalert2';
@@ -9,7 +9,7 @@ const Home = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
     const navigate = useNavigate();
-    const { setLoggedIn } = useAuth();
+    const { setLoggedIn, setUserRole, setUserId } = useAuth();
 
     const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
         setShowPassword(!showPassword);
@@ -21,8 +21,10 @@ const Home = () => {
         try {
             const response = await login(email, password);
             localStorage.setItem('token', response.token);
-            localStorage.setItem('role', response.role);
             setLoggedIn(true);
+            setUserRole(response.role);
+            setUserId(response.user_id)
+            console.log(response)
             navigate("/news");
         } catch (error) {
             console.error('Error al iniciar sesión:', error);

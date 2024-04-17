@@ -1,23 +1,12 @@
-import { useAuth } from "../context/AuthContext";
 import "./GalleryNews.css"
 import { Link, useNavigate, useLoaderData } from 'react-router-dom';
 
 const GalleryNews = () => {
   const navigate = useNavigate();
-  const { setLoggedIn, loggedIn } = useAuth();
   const news = useLoaderData();
-
-  const handleLogOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    setLoggedIn(false);
-  }
 
   return (
     <>
-      <div className="flex items-center justify-end mt-4">
-        <button onClick={() => { handleLogOut(); navigate('/'); }} className="mr-10 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Logout</button>
-      </div>
       <div className="m-10 flex items-center justify-between">
         <h3 className="text-3xl">Tecnología - Últimas noticias</h3>
         <button onClick={() => navigate("/news/add")} className=" inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 uppercase">Añadir noticia</button>

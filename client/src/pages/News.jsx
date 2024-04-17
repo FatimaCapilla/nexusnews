@@ -2,20 +2,19 @@ import { useEffect, useState } from 'react';
 import { getOneNews, deleteNews } from '../services/newsServices';
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import "../pages/News.css"
+import { useAuth } from '../context/AuthContext';
 
 const News = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [userRole, setUserRole] = useState('');
+  const { userRole, userId } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getOneNews(id);
       setData(response);
     }
-    const userRole = localStorage.getItem('role');
-    setUserRole(userRole);
     fetchData()
   }, [id]);
 
