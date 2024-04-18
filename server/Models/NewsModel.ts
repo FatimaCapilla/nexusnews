@@ -25,7 +25,7 @@ const NewsModel = connection_db.define<NewsInstance>("News", {
     allowNull: false,
   },
   body: {
-    type: DataTypes.STRING(1000),
+    type: DataTypes.STRING(10000),
     allowNull: false,
   },
   user_id: {
