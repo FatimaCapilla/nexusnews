@@ -153,8 +153,8 @@ This will run the back tests.
 
 # Authors
 
- - Scrum Master: [Elena López](https://github.com/elenalope)
- - Product Owner: [Beatriz Custodio](https://github.com/BeatrizCPerez)
+ - Scrum Master:  [Beatriz Custodio](https://github.com/BeatrizCPerez)
+ - Product Owner: [Elena López](https://github.com/elenalope)
  - Web Developer: [Fátima Capilla](https://github.com/FatimaCapilla)
  - Web Developer: [María Andrea An](https://github.com/mariandrean)
  - Web Developer: [Nuria Vicente](https://github.com/NuriaVicenteRodriguez)
