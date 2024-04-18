@@ -1,0 +1,50 @@
+.news-model {
+  margin: auto;
+  padding: 0 2.5rem;
+  color: #EEF0E5;
+}
+
+.title-news {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem;
+}
+
+.image-news {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.image-news img {
+  margin: 1rem 2rem;
+  max-width: 90%;
+  height: auto;
+}
+
+.date {
+  font-size: 1rem;
+  text-align: end;
+  margin: 2rem;
+}
+
+.body-news {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 2rem;
+}
+
+.delete-button:hover {
+  background-color: #8E0000;
+  color: white;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.update-button:hover {
+  background-color: #7192A4;
+  color: white;
+}
