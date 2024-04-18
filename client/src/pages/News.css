@@ -1,6 +1,6 @@
 .news-model {
   margin:  auto; /* Margen alrededor del contenedor */
-  max-width: 90%; /* Ancho máximo del contenedor */
+  padding: 0 2.5rem;
   color: #EEF0E5;
 }
 
@@ -32,15 +32,6 @@
   font-size: 1.2rem; /* Tamaño de fuente más grande para el cuerpo */
   line-height: 1.5; /* Espaciado entre líneas */
   margin: 2rem; 
-}
-
-.delete-button, .edit-button, .details-button, .update-button{
-  border-radius: 150px;
-  background-color: #EEF0E5;
-  padding: 6px;
-  color: #1F1E1E;
-  margin-right: 7%;
-  width: 100px;
 }
 
 .delete-button:hover {

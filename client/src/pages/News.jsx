@@ -35,27 +35,29 @@ const News = () => {
     }
   }
 
-  return (
-    <div className='news-model'>
-      <div className="flex items-center justify-around">
-        {userRole === 'admin' && (
-          <button className="inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={() => navigate(`/news/${id}/update`)}>Editar</button>
-        )}
-        {userRole === 'admin' && (
-          <button className="inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={handleDelete}>Eliminar</button>
-        )}
-      </div>
-      {data ? (
+  if (data) {
+    return (
+      <div className='news-model'>
+        <div className="flex items-center justify-center gap-20">
+          {userRole === 'admin' && userId === data.user_id && (
+            <button className="update-button px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={() => navigate(`/news/${id}/update`)}>Editar</button>
+          )}
+          {userRole === 'admin' && (
+            <button className="delete-button px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={handleDelete}>Eliminar</button>
+          )}
+        </div>
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1>
           <div className='image-news'><img src={data.image} alt='img-news' className='image' /></div>
           <div className='date'><span className='strong'></span>{data.date}</div>
           <h3 className='body-news'><span className='body'>{data.body}</span></h3>
         </article>
-      ) : (
-        <p>Loading data...</p>
-      )}
-    </div>
+        
+      </div>
+    )
+  }
+  else return (
+    <p>Loading data...</p>
   )
 }
 

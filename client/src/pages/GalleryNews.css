@@ -41,17 +41,20 @@ body {
 }
 
 .url-img {
-  width: 25%;
+  width: 30%;
   /* Ocupa el 65% del ancho de la noticia */
-  height: 30%;
+  height: 5rem;
   /* Ocupa toda la altura de la noticia */
   object-fit: cover;
   /* Ajusta la imagen para que cubra todo el contenedor */
-  margin-left: 8%;
+  margin-left: 2rem;
+}
+
+.news-title-date {
+  width: 65%;
 }
 
 .gallery-news-details {
-  width: 50%;
   /* Ocupa el 35% restante del ancho de la noticia */
   padding: 10px;
   /* Espaciado interior para el contenido */

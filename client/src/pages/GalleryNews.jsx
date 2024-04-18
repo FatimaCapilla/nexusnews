@@ -15,12 +15,10 @@ const GalleryNews = () => {
       <div className="flex-column">
         {news.map((item, index) => (
           <div key={index} className="gallery-news-item justify-between">
-            <div className="flex">
-              <img className="url-img" src={item.image} alt="Noticia" />
-              <div className="flex-column ml-5 mr-5">
-                <h4 className="text-xl uppercase">{item.title}</h4>
-                <p className="date">{item.date}</p>
-              </div>
+            <img className="url-img" src={item.image} alt="Noticia" />
+            <div className="news-title-date flex-column ml-5 mr-5">
+              <h4 className="text-xl uppercase">{item.title}</h4>
+              <p className="date">{item.date.slice(0, 10)}</p>
             </div>
             <Link to={`/news/${item.id}`}>
               <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />

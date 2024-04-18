@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const { setLoggedIn, setUserRole, setUserId } = useAuth();
+    const { setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
 
     const onSubmit = async (data) => {
         try {
@@ -16,7 +16,8 @@ const Home = () => {
             localStorage.setItem('token', response.token);
             setLoggedIn(true);
             setUserRole(response.role);
-            setUserId(response.user_id)
+            setUserId(response.user_id);
+            setUserEmail(data.email);
             console.log(response)
             navigate("/news");
         } catch (error) {
