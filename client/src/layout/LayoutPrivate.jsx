@@ -3,19 +3,18 @@ import { useAuth } from '../context/AuthContext';
 
 const LayoutPrivate = () => {
     const navigate = useNavigate();
-    const { userEmail, loggedIn, userId, setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
+    const token = localStorage.getItem('token')
+    const userEmail = localStorage.getItem('userEmail')
 
     const handleLogOut = () => {
-
         localStorage.removeItem('token');
-        setLoggedIn(false);
-        setUserId(null);
-        setUserRole(null);
-        setUserEmail(null);
+        localStorage.removeItem('userId');
+        localStorage.removeItem('role');
+        localStorage.removeItem('email');
         navigate('/');
     }
 
-    if (loggedIn) {
+    if (token) {
         return (
             <>
                 <div className="flex gap-10 items-center justify-end mb-5">

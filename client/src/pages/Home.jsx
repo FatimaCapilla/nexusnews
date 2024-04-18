@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { login } from '../services/usersServices';
 import Swal from 'sweetalert2';
 
 const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const { setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -18,11 +16,9 @@ const Home = () => {
         try {
             const response = await login(data.email, data.password);
             localStorage.setItem('token', response.token);
-            setLoggedIn(true);
-            setUserRole(response.role);
-            setUserId(response.user_id);
-            setUserEmail(data.email);
-            console.log(response)
+            localStorage.setItem('userRole', response.role);
+            localStorage.setItem('userId', response.user_id);
+            localStorage.setItem('userEmail', data.email);
             navigate("/news");
         } catch (error) {
             console.error('Error al iniciar sesión:', error);

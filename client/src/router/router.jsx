@@ -8,11 +8,13 @@ import LayoutPublic from '../layout/LayoutPublic'
 import UpdateNews from '../pages/UpdateNews'
 import LayoutPrivate from "../layout/LayoutPrivate";
 import { getNews } from "../services/newsServices";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LayoutPublic />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         index: true,

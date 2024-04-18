@@ -12,14 +12,18 @@ const UpdateNews = () => {
     image: '',
     date: '',
   });
+  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     const fetchNewsById = async () => {
       try {
         const newsData = await getOneNews(id);
-        if (newsData) {
+        if (userId != newsData.user_id){
+          return navigate(`/news/${id}`);
+        } else {
           setNews(newsData);
         }
+
       } catch (error) {
         console.error('Error fetching news:', error);
         Swal.fire({
