@@ -1,10 +1,8 @@
 import { useNavigate, useRouteError } from 'react-router-dom';
 
-function ErrorBoundary() {
+const ErrorBoundary = () => {
   let error = useRouteError();
   const navigate = useNavigate();
-  console.error(error);
-  // Uncaught ReferenceError: path is not defined
   return (
     <div className='m-auto flex-column'>
       <h2 className='text-center text-5xl'>Error 404</h2>
