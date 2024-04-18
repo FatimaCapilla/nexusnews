@@ -2,20 +2,16 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { createNews } from '../services/newsServices';
 
 const AddNews = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
 
     const handleRegister = async (data) => {
-        const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:3000/api/news', data, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            if (response.status === 201) {
+            const response = await createNews(data);
+            if (response) {
                 Swal.fire({
                     title: 'Registro exitoso',
                     text: '¡Tu noticia ha sido creada!',

@@ -49,7 +49,7 @@ const UpdateNews = () => {
     e.preventDefault();
     try {
       const result = await updateNews(id, news);
-      if (result.success) {
+      if (result) {
         Swal.fire({
           title: 'Registro exitoso',
           text: '¡Tu noticia ha sido actualizada!',
