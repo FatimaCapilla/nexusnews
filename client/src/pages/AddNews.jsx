@@ -61,7 +61,7 @@ const AddNews = () => {
                                 type='text'
                                 name='title'
                                 placeholder='Título'
-                                {...register('title', { required: 'El título es requerido', maxLength: { value: 200, message: 'El título debe tener menos de 200 caracteres' } })}
+                                {...register('title', { required: 'El título es requerido', maxLength: { value: 200, message: 'El título debe tener menos de 200 caracteres', minLength: { value: 1, message: 'El título no puede estar vacío' }}})}
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]"
                             />
                             {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
@@ -73,7 +73,7 @@ const AddNews = () => {
                                 type='text'
                                 name='body'
                                 placeholder='Noticia'
-                                {...register('body', { required: 'El cuerpo de la noticia es requerido', maxLength: { value: 1000, message: 'El cuerpo de la noticia debe tener menos de 1000 caracteres' } })}
+                                {...register('body', { required: 'El cuerpo de la noticia es requerido', maxLength: { value: 50000, message: 'El cuerpo de la noticia debe tener menos de 50000 caracteres' }, minLength: { value: 1, message: 'El título no puede estar vacío' } })}
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]"
                             />
                             {errors.body && <p className="text-red-500 text-sm">{errors.body.message}</p>}
@@ -97,7 +97,7 @@ const AddNews = () => {
                                 type='date'
                                 name='date'
                                 placeholder='Fecha'
-                                {...register('date', { required: 'La fecha es requerida' })}
+                                {...register('date', { required: 'La fecha debe estar rellena' })}
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]"
                             />
                             {errors.date && <p className="text-red-500 text-sm">{errors.date.message}</p>}
