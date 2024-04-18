@@ -12,7 +12,7 @@ export const validateCreateNews = [
     check('body')
         .exists().withMessage("The body is required")
         .notEmpty().withMessage("The body can't be empty")
-        .isLength({ min: 1, max: 1000 }).withMessage("Body must be between 1 and 1000 characters"),
+        .isLength({ min: 1, max: 10000 }).withMessage("Body must be between 1 and 10000 characters"),
 
 
     check('date')
