@@ -10,7 +10,7 @@ const Home = () => {
     const navigate = useNavigate();
     const { setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
-    const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
+    const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
@@ -51,7 +51,7 @@ const Home = () => {
                         <div className="mt-4">
                             <div className="relative">
                                 <input id="password" type={showPassword ? 'text' : 'password'} name="password" placeholder="Contraseña" {...register('password', { required: true })} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
-                                
+
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
                                         {showPassword ? 'Ocultar' : 'Mostrar'}

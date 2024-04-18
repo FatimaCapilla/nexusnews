@@ -14,7 +14,7 @@ const LayoutPrivate = () => {
         setUserEmail(null);
         navigate('/');
     }
-    
+
     if (loggedIn) {
         return (
             <>

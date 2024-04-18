@@ -122,7 +122,7 @@ const UpdateNews = () => {
                 type='date'
                 name='date'
                 placeholder='Fecha'
-                value={news.date}
+                value={news.date.slice(0,10)}
                 required
                 onChange={handleChange}
                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />

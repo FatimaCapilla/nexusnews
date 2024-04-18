@@ -12,12 +12,10 @@ export const tokenSign = (user: any) => {
     return token;
 }
 
-
-
-export const verifyToken = (tokenJwt: string) => { // Asegúrate de que tokenJwt sea de tipo string
+export const verifyToken = (tokenJwt: string) => { 
     try {
         return jwt.verify(tokenJwt, SECRET_KEY);
     } catch (error) {
-        return null; 
+        return null;
     }
 }

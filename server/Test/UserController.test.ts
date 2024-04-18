@@ -1,5 +1,5 @@
 import request from 'supertest';
-import {app, server} from '../app'; // Asumiendo que tienes un archivo app.ts que exporta la instancia de Express
+import { app, server } from '../app';
 import UserModel from "../Models/UserModel";
 import { UserLogin, userAdmin, wrongUser } from "../Test/helpers";
 import { tokenInit } from '../Test/Token';
@@ -12,17 +12,12 @@ describe('Login and Get Users Tests', () => {
     let token: string;
 
     beforeEach(async () => {
-        // Crear un usuario para las pruebas de login
-        const hashedPassword = await bcrypt.hash(userAdmin.password, 10); 
-
-        // Crear el nuevo usuario con la contraseña encriptada
-        const newUserAdmin: any = await UserModel.create({...userAdmin, password: hashedPassword });
-        // Obtener el token de autenticación para las pruebas de obtención de usuarios
+        const hashedPassword = await bcrypt.hash(userAdmin.password, 10);
+        const newUserAdmin: any = await UserModel.create({ ...userAdmin, password: hashedPassword });
         token = tokenInit(newUserAdmin);
     });
 
     afterEach(async () => {
-        // Eliminar el usuario creado después de cada prueba
         await UserModel.destroy({ where: { email: UserLogin.email } });
     });
 
@@ -52,7 +47,6 @@ describe('Login and Get Users Tests', () => {
         });
     });
     afterAll(async () => {
-        // Cerrar el servidor y sincronizar la base de datos para limpiar los datos
         server.close();
         await connection_db.sync({ force: true });
         console.log('All databases are clean');

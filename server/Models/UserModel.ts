@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connection_db from '../database/connection_db';
 
-// Definimos una interfaz que describe la estructura del modelo de usuario
 interface UserInstance extends Model {
   id: number;
   email: string;
@@ -9,10 +8,9 @@ interface UserInstance extends Model {
   role: string;
 }
 
-// Definimos el modelo de usuario
 const UserModel = connection_db.define<UserInstance>('User', {
   id: {
-    type: DataTypes.INTEGER, 
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
@@ -27,12 +25,12 @@ const UserModel = connection_db.define<UserInstance>('User', {
   },
   role: {
     type: DataTypes.STRING,
-    defaultValue : 'user',
+    defaultValue: 'user',
     allowNull: false
-}},
-{
-  timestamps: false
-});
+  }
+},
+  {
+    timestamps: false
+  });
 
-// Exportamos el modelo de usuario
 export default UserModel;

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 
 export const AuthContext = React.createContext();
 
-// Proveedor del contexto para gestionar el estado de inicio de sesión
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [userRole, setUserRole] = useState(null);
@@ -18,5 +17,4 @@ const AuthProvider = ({ children }) => {
 
 export default AuthProvider;
 
-// Hook personalizado para acceder al contexto de autenticación
 export const useAuth = () => useContext(AuthContext);

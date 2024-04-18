@@ -3,9 +3,7 @@ import { check } from 'express-validator';
 import { validateResult } from '../helpers/validateHelper';
 import UserModel from '../Models/UserModel';
 
-// Validation schema for user registration
 export const validateRegisterUser = [
-    // Check for email field
     check('email')
         .exists().withMessage("Email is required")
         .notEmpty().withMessage("Email cannot be empty")
@@ -17,8 +15,6 @@ export const validateRegisterUser = [
             }
             return true;
         }),
-
-    // Check for password field
     check('password')
         .exists().withMessage("Password is required")
         .notEmpty().withMessage("Password cannot be empty")
@@ -29,15 +25,11 @@ export const validateRegisterUser = [
     }
 ];
 
-// Validation schema for user login
 export const validateLoginUser = [
-    // Check for email field
     check('email')
         .exists().withMessage("Email is required")
         .notEmpty().withMessage("Email cannot be empty")
         .isEmail().withMessage("Invalid email format"),
-
-    // Check for password field
     check('password')
         .exists().withMessage("Password is required")
         .notEmpty().withMessage("Password cannot be empty"),

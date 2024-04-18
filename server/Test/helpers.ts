@@ -11,17 +11,13 @@ export const deleteUser = {
     "role": "admin"
 }
 
-
 export const testTry = {
     "title": "titleeeeee",
     "body": "bodyyyyyy",
-    "date": moment().toISOString(), // Formatear la fecha con todos los detalles de tiempo
+    "date": moment().toISOString(),
     "image": "http://www.google.com"
 }
 
-
-
-// Datos de prueba para el inicio de sesión
 export const UserLogin = {
     email: 'adminuser@gmail.com',
     password: '123456'
@@ -33,7 +29,6 @@ export const wrongUser = {
     password: '654321'
 }
 
-// Datos de prueba para la obtención de usuarios
 export const userAdmin = {
     email: 'adminuser@gmail.com',
     password: '123456',

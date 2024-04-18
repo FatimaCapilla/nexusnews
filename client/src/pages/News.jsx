@@ -52,7 +52,7 @@ const News = () => {
           <div className='date'><span className='strong'></span>{data.date.slice(0, 10)}</div>
           <h3 className='body-news'><span className='body'>{data.body}</span></h3>
         </article>
-        
+
       </div>
     )
   }

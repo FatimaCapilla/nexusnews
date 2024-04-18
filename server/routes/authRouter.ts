@@ -9,7 +9,7 @@ import { validateLoginUser } from '../validators/userValidator';
 const router = express.Router();
 
 router.post('/users/register', validateRegisterUser, registerUser);
-router.post('/users/login',validateLoginUser, loginUser);
+router.post('/users/login', validateLoginUser, loginUser);
 router.get('/users', authRol(['admin']), getUsers);
 
 export default router;

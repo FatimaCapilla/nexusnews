@@ -21,8 +21,8 @@ main {
     min-height: 80vh;
 }
 
-@media screen and (width <= 500px){
+@media screen and (width <=500px) {
     html {
-      font-size: 12px;
+        font-size: 12px;
     }
 }

@@ -8,18 +8,14 @@ export const validateCreateNews = [
         .exists().withMessage("The title is required")
         .notEmpty().withMessage("The title can't be empty")
         .isLength({ min: 1, max: 200 }).withMessage("Title must be between 1 and 200 characters"),
-
     check('body')
         .exists().withMessage("The body is required")
         .notEmpty().withMessage("The body can't be empty")
         .isLength({ min: 1, max: 10000 }).withMessage("Body must be between 1 and 10000 characters"),
-
-
     check('date')
-    .exists().withMessage("The date is required")
-    .notEmpty().withMessage("The date can't be empty")
-    .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
-
+        .exists().withMessage("The date is required")
+        .notEmpty().withMessage("The date can't be empty")
+        .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
     check('image')
         .exists().withMessage("The image is required")
         .notEmpty().withMessage("The image can't be empty")
@@ -30,31 +26,23 @@ export const validateCreateNews = [
     }
 ];
 
-
 export const validateUpdateNews = [
     check('title')
         .exists().withMessage("The title is required")
         .notEmpty().withMessage("The title can't be empty")
         .isLength({ min: 1, max: 200 }).withMessage("Title must be between 1 and 200 characters"),
-
     check('body')
         .exists().withMessage("The body is required")
         .notEmpty().withMessage("The body can't be empty")
         .isLength({ min: 1, max: 10000 }).withMessage("Body must be between 1 and 1000 characters"),
-
-
-
     check('date')
-    .exists().withMessage("The date is required")
-    .notEmpty().withMessage("The date can't be empty")
-    .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
-
-
+        .exists().withMessage("The date is required")
+        .notEmpty().withMessage("The date can't be empty")
+        .isISO8601().withMessage("La fecha debe estar en formato ISO8601"),
     check('image')
         .exists().withMessage("The image is required")
         .notEmpty().withMessage("The image can't be empty")
         .isURL().withMessage("Must be a valid URL"),
-
     check('id')
         .exists()
         .notEmpty()
@@ -71,7 +59,6 @@ export const validateUpdateNews = [
         validateResult(req, res, next);
     }
 ];
-
 
 export const validateDeleteNews = [
     check('id')

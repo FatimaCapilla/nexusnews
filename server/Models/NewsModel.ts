@@ -2,7 +2,6 @@ import { DataTypes, Model } from "sequelize";
 import connection_db from "../database/connection_db";
 import UserModel from "./UserModel";
 
-// Definición de la interfaz para el modelo de noticia
 interface NewsInstance extends Model {
   id: number;
   title: string;
@@ -12,7 +11,6 @@ interface NewsInstance extends Model {
   image: string;
 }
 
-// Define el modelo de noticia
 const NewsModel = connection_db.define<NewsInstance>("News", {
   id: {
     type: DataTypes.INTEGER,
@@ -44,7 +42,7 @@ const NewsModel = connection_db.define<NewsInstance>("News", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-},{
+}, {
   timestamps: false
 });
 

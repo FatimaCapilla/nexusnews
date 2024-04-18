@@ -13,12 +13,9 @@ body {
 
 .gallery-button {
   padding: 10px 20px;
-  /* Agrega más relleno para hacer el botón más grande */
   font-size: 15px;
-  /* Ajusta el tamaño del texto */
   font-weight: bolder;
   width: 200px;
-  /* Ajusta el ancho del botón */
   background-color: #EEF0E5;
   color: #1F1E1E;
   border-radius: 10px;
@@ -26,27 +23,18 @@ body {
 
 .gallery-news-item {
   border-top: 2px solid #fff;
-  /* Añade una línea horizontal delgada */
   padding-top: 10px;
-  /* Ajusta el espaciado entre la línea y el contenido de la noticia */
   margin-top: 20px;
-  /* Ajusta el espaciado entre las noticias */
   width: 95%;
-  /* Ocupa el 95% del ancho de la página */
   height: 30%;
-  /* Ocupa el 30% de la altura de la página */
   display: flex;
-  /* Utiliza flexbox para organizar los elementos */
   font-size: 2rem;
 }
 
 .url-img {
   width: 30%;
-  /* Ocupa el 65% del ancho de la noticia */
   height: 5rem;
-  /* Ocupa toda la altura de la noticia */
   object-fit: cover;
-  /* Ajusta la imagen para que cubra todo el contenedor */
   margin-left: 2rem;
 }
 
@@ -55,11 +43,8 @@ body {
 }
 
 .gallery-news-details {
-  /* Ocupa el 35% restante del ancho de la noticia */
   padding: 10px;
-  /* Espaciado interior para el contenido */
   box-sizing: border-box;
-  /* Incluye el padding en el ancho total */
   margin-left: 5%;
 }
 
@@ -68,7 +53,6 @@ body {
   max-width: 2rem;
   height: auto;
 }
-
 
 .date {
   margin-top: 10%;

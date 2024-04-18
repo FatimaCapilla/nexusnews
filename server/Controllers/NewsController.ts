@@ -14,7 +14,7 @@ export const getAllNews = async (req: Request, res: Response) => {
 
 export const addNews = async (req: Request, res: Response) => {
     const { title, body, date, image } = req.body;
-    const user_id = (req as any).userId; // Obtener userId del token JWT
+    const user_id = (req as any).userId; 
     try {
         const news = await NewsModel.create({ title, body, user_id, date, image });
         res.status(201).json(news);
@@ -27,11 +27,11 @@ export const addNews = async (req: Request, res: Response) => {
 export const editNews = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { title, body, date, image } = req.body;
-    const user_id = (req as any).userId; // Obtener userId del token JWT
+    const user_id = (req as any).userId; 
     try {
         const news = await NewsModel.findByPk(id);
         if (news) {
-            if (news.user_id !== user_id) { // Verificar si el usuario que edita es el dueño de la noticia
+            if (news.user_id !== user_id) { 
                 return res.status(403).json({ message: 'No tienes permiso para editar esta noticia.' });
             }
             const updatedNews = await news.update({ title, body, date, image });
@@ -63,13 +63,13 @@ export const deleteNews = async (req: Request, res: Response) => {
 export const getOneNews = async (req: Request, res: Response) => {
     const idNews = req.params.id;
     try {
-        const news = await NewsModel.findOne({ where: { id: idNews }});
+        const news = await NewsModel.findOne({ where: { id: idNews } });
         if (news) {
             res.status(200).json(news);
         } else {
             res.status(404).json({ message: 'News not found' });
         }
-    } catch(error) {
+    } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };

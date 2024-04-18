@@ -21,7 +21,6 @@ const AddNews = () => {
                     text: '¡Tu noticia ha sido creada!',
                     icon: 'success',
                 });
-                reset(); // Resetear los campos del formulario
                 navigate("/news");
             } else {
                 Swal.fire({
@@ -57,7 +56,7 @@ const AddNews = () => {
                                 name='title'
                                 placeholder='Título'
                                 {...register('title', { required: 'El título es requerido', maxLength: { value: 200, message: 'El título debe tener menos de 200 caracteres' }, minLength: { value: 1, message: 'El título no puede estar vacío' } })}
-                                className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]"/>
+                                className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                             {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
                         </div>
                         <div className="mb-4">
