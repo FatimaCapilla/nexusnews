@@ -3,14 +3,10 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  padding: 0.5rem 0;
+  height: 6rem;
 }
 
 .logo {
-  margin-left: 30%;
-  padding: 2%;
-  width: 30%;
-  height: auto;
+  height: 5rem;
 }
