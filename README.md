@@ -100,14 +100,14 @@ This will run the back tests.
 * __src:__
     * __assets:__ all the images.
     * __components:__ it contains the navbar and the footer.
-    * __context:__ 
-    * __layout:__
-    * __pages:__
-    * __router:__
-    * __services:__
-    * __test:__
-    * __index.css:__
-    * __main.jsx:__
+    * __context:__ This code sets up an authentication context in React and provides a hook for accessing authentication data in functional components.
+    * __layout:__ It features two main layouts: `LayoutPublic` and `LayoutPrivate`, responsible for defining the user interface structure for the pages.
+    * __pages:__ All the pages of the web.
+    * __router:__ route definitions for the methods of the API.
+    * __services:__ the methods of the crud.
+    * __test:__ unit and integration tests in one file.
+    * __index.css:__ contains the styles.
+    * __main.jsx:__ This code sets up the rendering of the React application.
 * __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
 * __index.html:__
 * __package.json and package-lock.json:__ these files contain metadata about your project and its dependencies. They also include scripts for running various tasks like starting the development server or building the production bundle.
@@ -117,7 +117,7 @@ This will run the back tests.
 * __controllers:__ to handle HTTP requests.
 * __database:__ configuration of connections with the database.
 * __helpers:__ contains the import and export validations from express-validator.
-* __Middleware:__
+* __Middleware:__ to add the tokens.
 * __models__: the model of database.
 * __node_modules:__ contains all the dependencies of your project. When you install packages using npm, they are stored here.
 * __routes:__ route definitions for the methods of the API.
