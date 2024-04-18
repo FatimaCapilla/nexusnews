@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -9,6 +9,10 @@ const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
+        setShowPassword(!showPassword);
+    };
 
     const onSubmit = async (data) => {
         try {
@@ -46,9 +50,15 @@ const Home = () => {
                         </div>
                         <div className="mt-4">
                             <div className="relative">
-                                <input id="password" type='password' name="password" placeholder="Contraseña" {...register('password', { required: true })} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
-                                {errors.password && <p className="text-red-500 text-xs">La contraseña no puede estar vacía</p>}
+                                <input id="password" type={showPassword ? 'text' : 'password'} name="password" placeholder="Contraseña" {...register('password', { required: true })} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                                
+                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm">
+                                    <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
+                                        {showPassword ? 'Ocultar' : 'Mostrar'}
+                                    </button>
+                                </div>
                             </div>
+                            {errors.password && <p className="text-red-500 text-xs">La contraseña no puede estar vacía</p>}
                         </div>
                         <div className="flex items-center justify-end mt-4">
                             <button type="submit" className="inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
