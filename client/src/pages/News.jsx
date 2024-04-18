@@ -49,7 +49,7 @@ const News = () => {
         <article className='news' key={data.id}>
           <h1 className='title-news'>{data.title}</h1>
           <div className='image-news'><img src={data.image} alt='img-news' className='image' /></div>
-          <div className='date'><span className='strong'></span>{data.date}</div>
+          <div className='date'><span className='strong'></span>{data.date.slice(0, 10)}</div>
           <h3 className='body-news'><span className='body'>{data.body}</span></h3>
         </article>
         

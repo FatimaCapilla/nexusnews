@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 
 const LayoutPrivate = () => {
     const navigate = useNavigate();
-    const { userEmail, loggedIn, userId, setLoggedIn, setUserRole, setUserId } = useAuth();
+    const { userEmail, loggedIn, userId, setUserEmail, setLoggedIn, setUserRole, setUserId } = useAuth();
 
     const handleLogOut = () => {
 
@@ -11,6 +11,7 @@ const LayoutPrivate = () => {
         setLoggedIn(false);
         setUserId(null);
         setUserRole(null);
+        setUserEmail(null);
         navigate('/');
     }
     
