@@ -1,60 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { getNews } from "../services/newsServices";
 import "./GalleryNews.css"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLoaderData } from 'react-router-dom';
 
 const GalleryNews = () => {
-  const [news, setNews] = useState([]);
-  const [userRole, setUserRole] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await getNews();
-        console.log("Data from getNews():", response);
-        if (response && Array.isArray(response)) {
-          setNews(response);
-        } else {
-          console.error("Data from getNews() is not in the expected format:", response);
-        }
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      }
-    };
-
-    const userRole = localStorage.getItem('role');
-    setUserRole(userRole);
-
-    fetchNews();
-  }, []);
+  const news = useLoaderData();
 
   return (
     <>
-      <div className="gallery-header">
-        <h3 className="gallery-h3">Tecnología - Últimas noticias</h3>
-        {userRole === 'admin' && (
-          <div className="flex space-x-4">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 1</button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Botón de administrador 2</button>
-          </div>
-        )}
-        <button onClick={() => navigate("/add")} className="gallery-button">Añadir noticia</button>
+      <div className="m-10 flex items-center justify-between">
+        <h3 className="text-3xl">Tecnología - Últimas noticias</h3>
+        <button onClick={() => navigate("/news/add")} className=" inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 uppercase">Añadir noticia</button>
       </div>
 
-      <div className="gallery">
+      <div className="flex-column">
         {news.map((item, index) => (
-          <div key={index} className="gallery-news-item">
-            <img className="url-img" src={item.image} alt="Noticia" />
-            <div className="gallery-news-details">
-              <div className="title-arrow">
-                <h4>{item.title}</h4>
-                <Link to={`/news/${item.id}`}>
-                  <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
-                </Link>
+          <div key={index} className="gallery-news-item justify-between">
+            <div className="flex">
+              <img className="url-img" src={item.image} alt="Noticia" />
+              <div className="flex-column ml-5 mr-5">
+                <h4 className="text-xl uppercase">{item.title}</h4>
+                <p className="date">{item.date}</p>
               </div>
-              <p className="date">{item.date}</p>
             </div>
+            <Link to={`/news/${item.id}`}>
+              <img className="arrow" src="src\assets\Vector.png" alt="Flecha" />
+            </Link>
           </div>
         ))}
       </div>

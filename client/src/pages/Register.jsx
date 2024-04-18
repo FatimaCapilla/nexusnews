@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../services/usersServices';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -42,37 +42,22 @@ const Register = () => {
             }
 
             // Realizar la solicitud POST con Axios
-            const response = await axios.post('http://localhost:3000/api/users/register', {
-                email,
-                password,
-                confirmPassword,
-            });
+            const response = await register(email, password, confirmPassword);
 
             // Verificar si la solicitud fue exitosa
-            if (response.status === 201) {
+            if (response) {
                 Swal.fire({
                     title: 'Registro exitoso',
                     text: '¡Tu cuenta ha sido creada!',
                     icon: 'success',
                 });
-                // Limpiar los campos del formulario
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
                 navigate("/");
-            } else {
-                // Manejar errores si la solicitud no fue exitosa
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
-                    icon: 'error',
-                });
             }
         } catch (error) {
             console.error('Error al intentar registrar:', error);
             Swal.fire({
                 title: 'Error',
-                text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo más tarde.',
+                text: 'Hubo un problema al intentar registrarse. Por favor, inténtalo de nuevo.',
                 icon: 'error',
             });
         }
@@ -89,7 +74,6 @@ const Register = () => {
                             </center>
                         </div>
                         <div>
-                            <label className="block font-medium text-[#EEF0E5] text-sm" htmlFor="email">Email</label>
                             <input
                                 id="email"
                                 type='email'
@@ -101,7 +85,6 @@ const Register = () => {
                                 className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                         </div>
                         <div className="mt-4">
-                            <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="password">Contraseña</label>
                             <div className="relative">
                                 <input
                                     id="password"
@@ -123,7 +106,6 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="mt-4">
-                            <label className="block font-medium text-sm text-[#EEF0E5]" htmlFor="confirmPassword">Confirmar contraseña</label>
                             <input
                                 id="confirmPassword"
                                 type={showPassword ? 'text' : 'password'}
@@ -140,14 +122,14 @@ const Register = () => {
                         <div className="flex items-center justify-end mt-4">
                             <button
                                 onClick={handleRegister}
-                                className="ms-4 inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                className="inline-flex items-center px-4 py-2 bg-[#EEF0E5] border border-transparent rounded-md font-semibold text-xs text-[#1F1E1E] tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Registrarse
                             </button>
 
                         </div>
                     </form>
                 </div>
-                <button onClick={() => navigate("/")} className="ms-4 inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
+                <button onClick={() => navigate("/")} className="inline-flex items-center px-4 py-2 bg-[#1F1E1E] border border-transparent rounded-md font-semibold text-xs text-[#EEF0E5] uppercase tracking-widest hover:bg-[#7192A4] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 mt-5">
                     Iniciar sesión
                 </button>
 

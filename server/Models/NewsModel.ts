@@ -1,40 +1,52 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import connection_db from "../database/connection_db";
-import UserModel from "./UserModel"
+import UserModel from "./UserModel";
 
-const NewsModel = connection_db.define('News', {
+// Definición de la interfaz para el modelo de noticia
+interface NewsInstance extends Model {
+  id: number;
+  title: string;
+  body: string;
+  user_id: number | null;
+  date: Date;
+  image: string;
+}
+
+// Define el modelo de noticia
+const NewsModel = connection_db.define<NewsInstance>("News", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
   },
   title: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING(200),
+    allowNull: false,
   },
   body: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING(1000),
+    allowNull: false,
   },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    references: { // Define la referencia a la tabla de usuarios
-      model: UserModel, // El modelo de usuario
-      key: 'id' // La clave primaria en la tabla de usuarios
-    }
+    references: {
+      model: UserModel,
+      key: "id",
+    },
   },
   date: {
-    type: DataTypes.DATE, // Cambiado a tipo DATE para almacenar fechas
-    allowNull: true,
+    type: DataTypes.DATE,
+    allowNull: false,
   },
   image: {
-    type: DataTypes.STRING(300),
-    allowNull: true,
-  }},{
-    timestamps: false
-  });
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+},{
+  timestamps: false
+});
 
 // Establece la relación entre News y User
 NewsModel.belongsTo(UserModel, { foreignKey: 'user_id' });

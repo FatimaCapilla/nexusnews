@@ -1,55 +1,21 @@
-import React, { useState,  useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 
 export const AuthContext = React.createContext();
 
 // Proveedor del contexto para gestionar el estado de inicio de sesión
 const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [dataUser, setDataUser] = useState([]);
-
-    useEffect(() => {
-        // Verificar si el usuario ya está autenticado al cargar la página
-        const token = localStorage.getItem('token');
-        if (token) {
-            setLoggedIn(true);
-        }
-    }, []);
-
-    // Función para iniciar sesión
-    const login = async (email, password) => {
-        try {
-            const response = await axios.post('http://localhost:3000/api/users/login', { email, password });
-
-            if (response.status === 200) {
-                const token = response.data.token;
-                localStorage.setItem('token', token);
-                setLoggedIn(true);
-                setDataUser(response.data.role);
-               
-            } else {
-                throw new Error('Credenciales incorrectas');
-            }
-        } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            throw new Error('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
-        }
-    };
-
-    // Función para cerrar sesión
-    const logout = () => {
-        localStorage.removeItem('token');
-        setLoggedIn(false);
-    };
+    const [userRole, setUserRole] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     return (
-        <AuthContext.Provider value={{ loggedIn, login, logout }}>
+        <AuthContext.Provider value={{ loggedIn, setLoggedIn, userRole, setUserRole, userId, setUserId }}>
             {children}
         </AuthContext.Provider>
     );
 };
-export default AuthProvider;
- //Hook personalizado para acceder al contexto de autenticación
- export const useAuth = () => useContext(AuthContext);
- 
 
+export default AuthProvider;
+
+// Hook personalizado para acceder al contexto de autenticación
+export const useAuth = () => useContext(AuthContext);
