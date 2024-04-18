@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login } from '../services/usersServices';
 import Swal from 'sweetalert2';
 
 const Home = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // Agregamos el estado para manejar la visibilidad de la contraseña
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { setLoggedIn, setUserRole, setUserId } = useAuth();
 
-    const togglePasswordVisibility = () => { // Definimos la función para alternar la visibilidad de la contraseña
-        setShowPassword(!showPassword);
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const onSubmit = async (data) => {
         try {
-            const response = await login(email, password);
+            const response = await login(data.email, data.password);
             localStorage.setItem('token', response.token);
             setLoggedIn(true);
             setUserRole(response.role);
@@ -40,29 +33,20 @@ const Home = () => {
         <div className="font-sans text-gray-900">
             <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-Login">
                 <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#1F1E1E] shadow-md overflow-hidden sm:rounded-lg rounded">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="py-8">
                             <center>
                                 <span className="text-2xl text-[#EEF0E5] font-semibold">Inicio de sesión</span>
                             </center>
                         </div>
                         <div>
-                            <input id="email" autoComplete="on" type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            <input id="email" autoComplete="on" type='email' placeholder='Email' {...register('email', { required: true })} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                            {errors.email && <p className="text-red-500 text-xs">El email no puede estar vacío</p>}
                         </div>
                         <div className="mt-4">
                             <div className="relative">
-                                <input id="password" type={showPassword ? 'text' : 'password'}
-                                    name="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Contraseña"
-                                    required autoComplete="current-password"
-                                    className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                                    <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
-                                        {showPassword ? 'Ocultar' : 'Mostrar'}
-                                    </button>
-                                </div>
+                                <input id="password" type='password' name="password" placeholder="Contraseña" {...register('password', { required: true })} className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
+                                {errors.password && <p className="text-red-500 text-xs">La contraseña no puede estar vacía</p>}
                             </div>
                         </div>
                         <div className="flex items-center justify-end mt-4">

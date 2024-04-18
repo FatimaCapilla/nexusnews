@@ -16,16 +16,13 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         try {
-            // Verificar si las contraseñas coinciden
             if (data.password !== data.confirmPassword) {
                 setPasswordsMatch(false);
                 return;
             }
 
-            // Realizar la solicitud POST con Axios
-            const response = await register(data.email, data.password, data.confirmPassword);
+    const response = await register(data.email, data.password, data.confirmPassword);
 
-            // Verificar si la solicitud fue exitosa
             if (response) {
                 Swal.fire({
                     title: 'Registro exitoso',
@@ -76,7 +73,6 @@ const Register = () => {
                                     className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] bg-[#EEF0E5]" />
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <button type="button" id="togglePassword" className="text-gray-500 focus:outline-none focus:text-gray-600 hover:text-gray-600" onClick={togglePasswordVisibility}>
-                                        {/* Icono de ojo */}
                                     </button>
                                 </div>
                             </div>
