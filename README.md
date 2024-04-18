@@ -1,13 +1,11 @@
-
-
-<h1>🔍 NexusNews 🗞️</h1>
+<h1> 💻 NexusNews 🗞️</h1>
 
 
 # Index
 
 + [Description](#description)
 + [Project Configuration](#project-configuration)
-+ [Initialize the Postman](#initialize-the-postman)
++ [Postman documentation](#postman-documentation)
 + [Test](#test)
 + [Project Structure ](#project-structure)
 + [Technologies](#technologies)
@@ -16,6 +14,11 @@
 
 # Description
 
+Nexus News is a web application designed for browsing and creating technology news. It is developed using React in the frontend, with JavaScript, and TypeScript in the backend.
+
+Upon launching the application, a login form is presented allowing access as either an administrator or user. Additionally, a registration form is provided to create a user account, which generates an access token necessary for viewing and creating news.
+
+Registered users can access the platform to view and create news. As an administrator, you have additional access to edit and delete news, in addition to the viewing and creation functions available to regular users.
 
 ## Project Configuration
 
@@ -63,21 +66,69 @@
   npm run dev
   ```
 
-## Initialize the Postman
+## Postman documentation
 https://documenter.getpostman.com/view/32563788/2sA3BkbCQq
 
 ## Test
+
+* Copy code in your terminal to enter in the repository front folder:
+  ```
+  cd client
 
 * Copy code:
   ```
   npm run test
   ```
-This will run the tests.
+This will run the front tests.
+
+* Copy code in your terminal to enter in the repository back folder:
+  ```
+  cd server
+
+* Copy code:
+  ```
+  npm run test
+  ```
+This will run the back tests.
 
 
 ## Project Structure 
 
+ __CLIENT__ 
+* __node_modules:__ contains all the dependencies of your project. When you install packages using npm, they are stored here.
+* __server:__ contains the db.json with the api fake.
+* __src:__
+    * __assets:__ all the images.
+    * __components:__ it contains the navbar and the footer.
+    * __context:__ 
+    * __layout:__
+    * __pages:__
+    * __router:__
+    * __services:__
+    * __test:__
+    * __index.css:__
+    * __main.jsx:__
+* __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
+* __index.html:__
+* __package.json and package-lock.json:__ these files contain metadata about your project and its dependencies. They also include scripts for running various tasks like starting the development server or building the production bundle.
+      
 
+ __SERVER__ 
+* __controllers:__ to handle HTTP requests.
+* __database:__ configuration of connections with the database.
+* __helpers:__ contains the import and export validations from express-validator.
+* __Middleware:__
+* __models__: the model of database.
+* __node_modules:__ contains all the dependencies of your project. When you install packages using npm, they are stored here.
+* __routes:__ route definitions for the methods of the API.
+* __test:__ unit and integration tests in one file.
+* __validators:__ contains the validations of the methods of the CRUD.
+* __.env:__ is a configuration file commonly used to store environment variables.
+* __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
+* __app.js:__ entry point of the application.
+* __config.js:__ application configuration, such as database and server configuration.
+* __package.json and package-lock.json:__ these files contain metadata about your project and its dependencies. They also include scripts for running various tasks like starting the development server or building the production bundle.
+* __README.md:__ this file typically contains instructions on how to set up and run your project, as well as any other relevant information for contributors or users.
 
 # Technologies
 
@@ -99,9 +150,6 @@ This will run the tests.
 <img width="50" src="https://cdn.worldvectorlogo.com/logos/nodemon.svg">&nbsp;
 <img width="50" src="https://express-validator.github.io/img/logo.svg">&nbsp;
 <img width="50" src="https://static-00.iconduck.com/assets.00/sequelize-original-icon-885x1024-r8dswyvj.png">&nbsp;
-
-
-Jira // Figma // HTML // CSS // JavaScript // Typescript // MySQL Workbench // GitHub // Visual Studio Code // Postman // React // Vite // DrawSQL // npm // express // nodemon // express validator // sequelize
 
 # Authors
 
